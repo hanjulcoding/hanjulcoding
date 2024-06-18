@@ -40,14 +40,13 @@ import { Button } from "@/components/ui/button";
 
 <style>
   :root {
-    --accent: 241, 245, 249; /* slate 500 */
-    --accent-light: 248, 250, 252;
-    --accent-dark: 148, 163, 184;
-    --accent-gradient: linear-gradient(
+    --main: 241, 245, 249; /* #f1f5f9, slate100 */
+    --main-light: 248, 250, 252; /* #f8fafc, slate50*/
+    --main-dark: 2, 6, 23; /* #020617, slate950*/
+    --main-gradient: linear-gradient(
       45deg,
-      rgb(var(--accent-dark)),
-      white 30%,
-      rgb(var(--accent)) 60%
+      rgb(var(--main-light)),
+      rgb(var(--main-dark)) 50%
     );
   }
   html {
@@ -92,7 +91,7 @@ import { Button } from "@/components/ui/button";
     margin-bottom: 1em;
   }
   .text-gradient {
-    background-image: var(--accent-gradient);
+    background-image: var(--main-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 400%;
@@ -100,21 +99,21 @@ import { Button } from "@/components/ui/button";
   }
   .instructions {
     margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+    border: 1px solid rgba(var(--main-light), 25%);
+    background: linear-gradient(rgba(var(--main-dark), 66%), rgba(var(--main-dark), 33%));
     padding: 1.5rem;
     border-radius: 8px;
   }
   .instructions code {
     font-size: 0.8em;
     font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
+    background: rgba(var(--main-light), 12%);
+    color: rgb(var(--main-light));
     border-radius: 4px;
     padding: 0.3em 0.4em;
   }
   .instructions strong {
-    color: rgb(var(--accent-light));
+    color: rgb(var(--main-light));
   }
   .link-card-grid {
     display: grid;
