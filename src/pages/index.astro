@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 
 <BaseLayout title="Welcome to Astro.">
   <main class="bg-black">
-    <h1>Welcome to <span class="text-gradient">Astro</span></h1>
-    <Button>shadcn/ui test2</Button>
+    <h1>Welcome to <span class="text-gradient">한줄코딩</span></h1>
+    <Button>shadcn/ui 버튼 테스트</Button>
     <p class="instructions">
       To get started, open the directory <code>src/pages</code> in your project.<br />
       <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
@@ -40,14 +40,14 @@ import { Button } from "@/components/ui/button";
 
 <style>
   :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
+    --accent: 241, 245, 249; /* slate 500 */
+    --accent-light: 248, 250, 252;
+    --accent-dark: 148, 163, 184;
     --accent-gradient: linear-gradient(
       45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
+      rgb(var(--accent-dark)),
+      white 30%,
+      rgb(var(--accent)) 60%
     );
   }
   html {
