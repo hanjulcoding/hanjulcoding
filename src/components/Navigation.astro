@@ -32,7 +32,8 @@
 
   .nav-links a:hover,
   .nav-links a:focus {
-    background-color: #ff9776;
+    background-color: rgb(var(--main-dark));
+    color:rgb(var(--main-light));
   }
 
   .expanded {
@@ -41,9 +42,8 @@
 
   @media screen and (min-width: 636px) {
     .nav-links {
-      margin-left: 5em;
-      display: block;
-      position: static;
+      justify-content: center;
+      display: flex;
       width: auto;
       background: none;
     }
