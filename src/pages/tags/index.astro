@@ -7,6 +7,18 @@ const tags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat
 const title = "Tag Index";
 ---
 
+<BaseLayout title={title}>
+  <div class="tags">
+    {
+      tags.map((tag) => (
+        <p class="tag">
+          <a href={`/tags/${tag}`}>{tag}</a>
+        </p>
+      ))
+    }
+  </div>
+</BaseLayout>
+
 <style>
   a {
     color: #00539f;
@@ -26,15 +38,3 @@ const title = "Tag Index";
     background-color: #f8fcfd;
   }
 </style>
-
-<BaseLayout title={title}>
-  <div class="tags">
-    {
-      tags.map((tag) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
-      ))
-    }
-  </div>
-</BaseLayout>

@@ -5,6 +5,7 @@ import { loadEnv } from "vite";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 
 export default defineConfig({
+  site: "https://hanjulcoding.com",
   integrations: [
     react(),
     tailwind({
