@@ -1,14 +1,12 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Card from "@/components/Card.astro";
-
-import { Button } from "@/components/ui/button";
 ---
 
 <BaseLayout title="Welcome to Astro.">
-  <main class="bg-black">
+  <main>
     <h1>Welcome to <span class="text-gradient">한줄코딩</span></h1>
-    <Button>shadcn/ui 버튼 테스트</Button>
+
     <p class="instructions">
       To get started, open the directory <code>src/pages</code> in your project.<br />
       <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
@@ -59,7 +57,7 @@ import { Button } from "@/components/ui/button";
     padding: 1rem;
     width: 800px;
     max-width: calc(100% - 2rem);
-    color: white;
+    color: rgb(var(--foreground));
     font-size: 20px;
     line-height: 1.6;
   }

@@ -7,14 +7,15 @@
     --main: 241, 245, 249; /* #f1f5f9, slate100 */
     --main-light: 248, 250, 252; /* #f8fafc, slate50*/
     --main-dark: 2, 6, 23; /* #020617, slate950*/
-    --main-gradient: linear-gradient(
-      45deg,
-      rgb(var(--main-light)),
-      rgb(var(--main-dark)) 50%
-    );
 
     --background: var(--main-light);
     --foreground: var(--main-dark);
+
+    --main-gradient: linear-gradient(
+      90deg,
+      rgb(var(--foreground)),
+      rgb(var(--background)) 40%
+    );
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
