@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Greeting from "@/components/test/Greeting";
 
-const pageTitle = "About Me";
+const title = "About Me";
 
 const identity = {
   firstName: "Sarah",
@@ -13,26 +14,28 @@ const identity = {
 const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 
 const happy = true;
-const finished = false;
+const finished = true;
 const goal = 3;
 
 const skillColor = "navy";
 ---
 
-<BaseLayout title={pageTitle}>
-  <style define:vars={{skillColor}}>
+<BaseLayout title={title}>
+  <style define:vars={{ skillColor }}>
     h1 {
-      color: purple;
+      color: var(--main);
       font-size: 4rem;
     }
     .skill {
-      color: var(--skillColor);
+      color: var(--main-dark);
       font-weight: bold;
     }
   </style>
   <main class="test">
-    <h1>{pageTitle}</h1>
+    <h1>{title}</h1>
     <h2>... and my new Astro site!</h2>
+
+    <Greeting client:visible type={"visible"} messages={["안녕", "Hello", "Hola"]} />
 
     <p>
       I am working through Astro's introductory tutorial. This is the second page on my website, and

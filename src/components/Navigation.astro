@@ -1,11 +1,12 @@
 ---
-
+import ThemeIcon from "@/components/ThemeIcon.astro";
 ---
 
 <div class="nav-links">
   <a href="/">Home</a>
   <a href="/about">About</a>
   <a href="/blog">Blog</a>
+  <ThemeIcon />
 </div>
 
 <style>
@@ -15,7 +16,6 @@
     width: 100%;
     top: 5rem;
     left: 48px;
-    background-color: #ff9776;
     display: none;
     margin: 0;
   }
@@ -32,8 +32,8 @@
 
   .nav-links a:hover,
   .nav-links a:focus {
-    background-color: rgb(var(--main-dark));
-    color:rgb(var(--main-light));
+    background-color: rgb(var(--foreground));
+    color:rgb(var(--background));
   }
 
   .expanded {

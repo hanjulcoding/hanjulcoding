@@ -4,8 +4,17 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --main: 241, 245, 249; /* #f1f5f9, slate100 */
+    --main-light: 248, 250, 252; /* #f8fafc, slate50*/
+    --main-dark: 2, 6, 23; /* #020617, slate950*/
+    --main-gradient: linear-gradient(
+      45deg,
+      rgb(var(--main-light)),
+      rgb(var(--main-dark)) 50%
+    );
+
+    --background: var(--main-light);
+    --foreground: var(--main-dark);
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -36,8 +45,8 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: var(--main-dark);
+    --foreground: var(--main-light);
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -63,6 +72,9 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
   }
 }
 
