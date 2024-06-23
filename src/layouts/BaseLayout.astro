@@ -1,6 +1,7 @@
 ---
 import "@/_globals.scss";
 import Header from "@/components/Header.astro";
+import Theme from "@/components/Theme.astro";
 import Footer from "@/components/Footer.astro";
 interface Props {
   title: string;
@@ -20,6 +21,7 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <Theme />
     <Header/>
     <slot />
     <Footer />
