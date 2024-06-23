@@ -17,5 +17,11 @@ export default defineConfig({
     server: {
       https: true,
     },
+    define: {
+      'process.env.CONTENTFUL_SPACE_ID': JSON.stringify(process.env.CONTENTFUL_SPACE_ID),
+      'process.env.CONTENTFUL_DELIVERY_TOKEN': JSON.stringify(process.env.CONTENTFUL_DELIVERY_TOKEN),
+      'process.env.CONTENTFUL_PREVIEW_TOKEN': JSON.stringify(process.env.CONTENTFUL_PREVIEW_TOKEN),
+      'process.env.DEV': JSON.stringify(process.env.NODE_ENV === 'development'),
+    },
   },
 });
