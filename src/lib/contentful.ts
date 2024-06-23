@@ -1,4 +1,7 @@
 import contentful, { type EntryFieldTypes } from "contentful";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 type AvatarImageEntrySkeleton = {
   contentType: EntryFieldTypes.Text;
@@ -11,15 +14,15 @@ type AvatarImageEntrySkeleton = {
 };
 
 type ImageEntrySkeleton = {
-  contentTypeId: 'featuredImage';
+  contentTypeId: "featuredImage";
   fields: {
     title: string;
     file: AvatarImageEntrySkeleton;
   };
-}
+};
 
 type AvatarEntrySkeleton = {
-  contentTypeId: 'avatar';
+  contentTypeId: "avatar";
   fields: {
     title: EntryFieldTypes.Text;
     description: EntryFieldTypes.Text;
@@ -28,7 +31,7 @@ type AvatarEntrySkeleton = {
 };
 
 type AuthorEntrySkeleton = {
-  contentTypeId: 'author';
+  contentTypeId: "author";
   fields: {
     internalName: EntryFieldTypes.Text;
     name: string;
@@ -37,7 +40,7 @@ type AuthorEntrySkeleton = {
 };
 
 export interface BlogPost {
-  contentTypeId: "blogPost",
+  contentTypeId: "blogPost";
   fields: {
     internalName: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
@@ -48,13 +51,14 @@ export interface BlogPost {
     featuredImage: EntryFieldTypes.Object<ImageEntrySkeleton>;
     content: EntryFieldTypes.RichText;
     relatedBlogPosts: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<BlogPost>>;
-  }
+  };
 }
 
 export const contentfulClient = contentful.createClient({
-  space: import.meta.env.CONTENTFUL_SPACE_ID,
-  accessToken: import.meta.env.DEV
-    ? import.meta.env.CONTENTFUL_PREVIEW_TOKEN
-    : import.meta.env.CONTENTFUL_DELIVERY_TOKEN,
-  host: import.meta.env.DEV ? "preview.contentful.com" : "cdn.contentful.com",
+  space: process.env.CONTENTFUL_SPACE_ID ?? "",
+  accessToken:
+    (process.env?.DEV
+      ? process.env.CONTENTFUL_PREVIEW_TOKEN
+      : process.env.CONTENTFUL_DELIVERY_TOKEN) ?? "",
+  host: process.env.DEV ? "preview.contentful.com" : "cdn.contentful.com",
 });
