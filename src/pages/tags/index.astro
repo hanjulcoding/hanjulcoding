@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
-const allPosts: Array<object> = await Astro.glob("../posts/*.md");
+const allPosts: Array<object> = await Astro.glob("../post/**/*.md");
 const tags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
 
 const title = "Tag Index";
