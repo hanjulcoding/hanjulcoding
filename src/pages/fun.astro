@@ -3,15 +3,15 @@ import "@/_globals.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Post from "@/components/Post.astro";
 
-const memePosts = await Astro.glob("./post/meme/*.md");
+const funPosts = await Astro.glob("./post/fun/*.md");
 ---
 
-<BaseLayout title="Meme">
+<BaseLayout title="fun">
   <main>
     <h1>My Astro Learning Blog</h1>
     <p>This is where I will post about my journey learning Astro.</p>
     <ul>
-      {memePosts.map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
+      {funPosts.map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
     </ul>
   </main>
 </BaseLayout>
