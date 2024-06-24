@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-// import { loadEnv } from "vite";
+import mdx from '@astrojs/mdx';
 import basicSsl from "@vitejs/plugin-basic-ssl";
 
 export default defineConfig({
@@ -11,6 +11,7 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
+    mdx(),
   ],
   vite: {
     plugins: [basicSsl()],

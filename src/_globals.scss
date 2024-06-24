@@ -4,18 +4,19 @@
 
 @layer base {
   :root {
-    --main: 241, 245, 249; /* #f1f5f9, slate100 */
-    --main-light: 248, 250, 252; /* #f8fafc, slate50*/
-    --main-dark: 2, 6, 23; /* #020617, slate950*/
+    --main: 241, 245, 249;
+    /* #f1f5f9, slate100 */
+    --main-light: 248, 250, 252;
+    /* #f8fafc, slate50*/
+    --main-dark: 2, 6, 23;
+    /* #020617, slate950*/
 
     --background: var(--main-light);
     --foreground: var(--main-dark);
 
-    --main-gradient: linear-gradient(
-      90deg,
-      rgb(var(--foreground)),
-      rgb(var(--background)) 40%
-    );
+    --main-gradient: linear-gradient(90deg,
+        rgb(var(--foreground)),
+        rgb(var(--background)) 40%);
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -43,6 +44,31 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    html {
+      font-family: system-ui, sans-serif;
+    }
+
+    code {
+      font-family:
+        Menlo,
+        Monaco,
+        Lucida Console,
+        Liberation Mono,
+        DejaVu Sans Mono,
+        Bitstream Vera Sans Mono,
+        Courier New,
+        monospace;
+    }
+
+    .text-gradient {
+      background-image: var(--main-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 400%;
+      background-position: 0%;
+    }
   }
 
   .dark {
