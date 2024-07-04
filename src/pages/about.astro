@@ -2,7 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Greeting from "@/components/test/Greeting";
 
-const title = "About Me";
+const title = "About";
 
 const identity = {
   firstName: "Sarah",
@@ -20,7 +20,7 @@ const goal = 3;
 const skillColor = "navy";
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={"- About"}>
   <style define:vars={{ skillColor }}>
     h1 {
       color: var(--main);
