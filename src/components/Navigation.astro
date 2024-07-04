@@ -7,6 +7,16 @@
   <a href="/trend">trend</a>
   <a href="/fun">fun</a>
   <a href="/blog">blog</a>
+  {import.meta.env.NODE_ENV === "development" && (
+  <a
+    href="/admin/index.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="underline"
+  >
+    Admin
+  </a>
+  )}
 </div>
 
 <style>

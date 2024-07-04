@@ -13,7 +13,7 @@ const { frontmatter } = Astro.props;
 
   <div class="tags">
     {
-      frontmatter.tags.map((tag: string) => (
+      frontmatter.tags.split(",").map((tag: string) => (
         <p class="tag">
           <a href={`/tags/${tag}`}>{tag}</a>
         </p>
@@ -23,7 +23,7 @@ const { frontmatter } = Astro.props;
 
   <slot />
 
-  <script
+  <script is:inline
     src="https://utteranc.es/client.js"
     repo="hanjulcoding/hanjulcoding"
     issue-term="title"

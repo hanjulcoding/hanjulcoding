@@ -3,7 +3,7 @@ import "@/style/globals.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Post from "@/components/Post.astro";
 
-const funPosts = await Astro.glob("./post/fun/*.{md,mdx}");
+const funPosts = await Astro.glob("./posts/fun/*.{md,mdx}");
 ---
 
 <BaseLayout title="fun">

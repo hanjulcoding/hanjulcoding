@@ -3,7 +3,7 @@ import "@/style/globals.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Post from "@/components/Post.astro";
 
-const trendPosts = await Astro.glob("./post/trend/*.md");
+const trendPosts = await Astro.glob("./posts/trend/*.md");
 ---
 
 <BaseLayout title="Trend">
