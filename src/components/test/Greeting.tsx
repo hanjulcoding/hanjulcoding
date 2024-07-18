@@ -15,10 +15,6 @@ export default function Greeting({
 
   return (
     <div>
-      <div>{type === "visible" ? `visible : 화면에 보일 때` : `load : 페이지 로드 후`}</div>
-      <h3>
-        {greeting}! Thank you for visiting! ({count})
-      </h3>
       <Button
         className="m-2"
         onClick={() => {
@@ -26,7 +22,7 @@ export default function Greeting({
           setCount((prev) => prev + 1);
         }}
       >
-        change
+        {greeting} ({count})
       </Button>
     </div>
   );

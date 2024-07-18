@@ -5,69 +5,39 @@ import Greeting from "@/components/test/Greeting";
 const title = "About";
 
 const identity = {
-  firstName: "Sarah",
-  country: "Canada",
-  occupation: "Technical Writer",
-  hobbies: ["photography", "birdwatching", "baseball"],
+  title: "한줄코딩",
+  categories: ["웹테크", "AI", "다양한 스킬", "테크블로그", "포트폴리오", "IT 관련 밈"],
 };
 
-const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
-
-const happy = true;
-const finished = true;
-const goal = 3;
-
-const skillColor = "navy";
+const hanjulColor = "cornflowerblue";
 ---
 
 <BaseLayout title={"- About"}>
-  <style define:vars={{ skillColor }}>
+  <style define:vars={{ hanjulColor }}>
     h1 {
       color: var(--main);
       font-size: 4rem;
     }
-    .skill {
-      color: var(--main-dark);
+    .link {
+      color: var(--hanjulColor);
       font-weight: bold;
     }
   </style>
-  <main class="test">
+  <main class="text-center">
     <h1>{title}</h1>
-    <h2>... and my new Astro site!</h2>
-
-    <Greeting client:visible type={"visible"} messages={["안녕", "Hello", "Hola"]} />
+    <h2>한줄코딩 사이트에 대해서</h2>
 
     <p>
-      I am working through Astro's introductory tutorial. This is the second page on my website, and
-      it's the first one I built myself!
+      테크 뉴스, 트렌드, 그리고 개발자들을 위한 다양한 정보를 제공하는 사이트입니다.
     </p>
 
     <p>
-      This site will update as I complete more of the tutorial, so keep checking back and see how my
-      journey is going!
+      아직 작업 중이고, 제 개인 <a class="link" href="https://6lueparr0t.github.io" target="_blank">포트폴리오</a> 작업이 완료되면 다시 업데이트 할 예정입니다.
     </p>
 
-    <p>Here are a few facts about me:</p>
-    <ul>
-      <li>My name is {identity.firstName}.</li>
-      <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
-      {
-        identity.hobbies.length >= 2 && (
-          <li>
-            Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}
-          </li>
-        )
-      }
-    </ul>
-    <p>My skills are:</p>
-    <ul>
-      {skills.map((skill) => <li class="skill">{skill}</li>)}
-    </ul>
+    <p>블로그는 앞으로</p>
+    <Greeting client:visible type={"visible"} messages={identity.categories} />
 
-    {happy && <p>I am happy to be learning Astro!</p>}
-
-    {finished && <p>I finished this tutorial!</p>}
-
-    {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+    <p>같은 것들로 채워질 예정입니다.</p>
   </main>
 </BaseLayout>
