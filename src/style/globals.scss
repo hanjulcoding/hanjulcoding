@@ -1,22 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url("/font/NeoDunggeunmoPro-Regular.woff") format('woff'), url("/font/NeoDunggeunmoPro-Regular.woff2") format('woff');
+}
+
+@mixin mobile() {
+  @media only screen and (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
+@mixin media-query($device) {
+  @media screen and (max-width: $device) {
+    @content;
+  }
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
 @layer base {
   :root {
     --main: 241, 245, 249;
-    /* #f1f5f9, slate100 */
-    --main-light: 248, 250, 252;
-    /* #f8fafc, slate50*/
-    --main-dark: 2, 6, 23;
-    /* #020617, slate950*/
+    /* #f1f5f9, zinc100 */
+    --main-light: 250, 250, 250;
+    /* #fafafa, zinc50*/
+    --main-dark: 9, 9, 11;
+    /* #09090B, zinc950*/
 
     --background: var(--main-light);
     --foreground: var(--main-dark);
 
     --main-gradient: linear-gradient(90deg,
-        rgb(var(--foreground)),
-        rgb(var(--background)) 40%);
+        rgba(var(--background)) 0%,
+        rgba(var(--foreground)) 60%);
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -45,10 +94,6 @@
 
     --radius: 0.5rem;
 
-    html {
-      font-family: system-ui, sans-serif;
-    }
-
     code {
       font-family:
         Menlo,
@@ -66,12 +111,23 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-size: 400%;
-      background-position: 0%;
+      background-size: 100%;
+
+      // @include mobile() {
+      //   background-size: 100%;
+      // }
     }
 
-    #content img {
-      max-width: calc(100% * 0.8);
+    .home .typed-cursor--blink {
+      background-color: rgba(var(--foreground));
+      width:7px;
+      height:83%;
+      display: inline-block;
+      transform: translateY(3px);
+
+      @include mobile() {
+        height:50px;
+      }
     }
   }
 
@@ -116,5 +172,6 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Noto Sans KR", sans-serif;
   }
 }
