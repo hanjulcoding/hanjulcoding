@@ -35,6 +35,20 @@ export default defineConfig({
         fields: [
           {
             type: "string",
+            name: "layout",
+            label: "Layout",
+            ui: {
+              component: ({ input }) => {
+                return (
+                  <>
+                    <Input {...input} type="hidden"/>
+                  </>
+                );
+              },
+            },
+          },
+          {
+            type: "string",
             name: "title",
             label: "Title",
             isTitle: true,
@@ -92,10 +106,12 @@ export default defineConfig({
           }) => {
             if (form.crudType === "create") {
               return {
+                layout: "../../../layouts/MarkdownPostLayout.astro",
                 ...values,
               };
             } else {
               return {
+                layout: "../../../layouts/MarkdownPostLayout.astro",
                 ...values,
               };
             }

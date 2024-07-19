@@ -69,6 +69,10 @@
       background-size: 400%;
       background-position: 0%;
     }
+
+    #content img {
+      max-width: calc(100% * 0.8);
+    }
   }
 
   .dark {
