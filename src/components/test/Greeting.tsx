@@ -8,7 +8,7 @@ export default function Greeting({
   type: "visible" | "load";
   messages: string[];
 }) {
-  const randomMessage = () => messages[Math.floor(Math.random() * messages.length)];
+  const messageList = () => messages[(count + 1) % messages.length];
 
   const [greeting, setGreeting] = useState(messages[0]);
   const [count, setCount] = useState(0);
@@ -18,11 +18,12 @@ export default function Greeting({
       <Button
         className="m-2"
         onClick={() => {
-          setGreeting(randomMessage());
           setCount((prev) => prev + 1);
+          setGreeting(messageList());
         }}
+        title={count.toString()}
       >
-        {greeting} ({count})
+        {greeting}
       </Button>
     </div>
   );
