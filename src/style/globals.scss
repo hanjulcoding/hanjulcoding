@@ -187,18 +187,19 @@
 
   .tag {
     margin: 0.25rem;
-    border: 1px solid var(--tag-border-color);
+    border: 1px solid rgba(var(--background));
     border-radius: 0.25rem;
     padding: .5rem;
     font-size: 1rem;
-    background-color: rgba(var(--background));
-    color: rgba(var(--foreground));
+    background-color: rgba(var(--foreground));
+    color: rgba(var(--background));
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    cursor: pointer;
 
     &:hover {
-      background-color: rgba(var(--foreground));
-      color: rgba(var(--background));
+      border: 1px solid rgba(var(--foreground));
+      background-color: rgba(var(--background));
+      color: rgba(var(--foreground));
     }
   }
 }

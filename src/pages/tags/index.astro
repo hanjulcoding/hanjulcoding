@@ -15,13 +15,13 @@ const title = "Tag Index";
 ---
 
 <BaseLayout title={title}>
-  <h1 class="text-2xl mb-8">태그 리스트</h1>
+  <h1 class="text-2xl mb-8">Tags</h1>
   <div class="tags">
     {
       tags.map((tag) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
+        <a href={`/tags/${tag}`}>
+          <span class="tag">{tag}</span>
+        </a>
       ))
     }
   </div>

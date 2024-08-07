@@ -33,7 +33,7 @@ const { posts }: { posts: any } = Astro.props;
 
 <BaseLayout title={tag}>
   <h1 class="text-2xl mb-8">
-    <span class="tag text-2xl"><a href={`/tags`}>{tag}</a></span>태그 와 연관 있는 글
+    <a href={`/tags`}><span class="tag text-xl">{tag}</span></a>태그와 연관 있는 글
   </h1>
   <ul>
     {posts.map((post: any) => <Post url={post.url} title={post.frontmatter.title} />)}
