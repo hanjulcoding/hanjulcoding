@@ -2,6 +2,7 @@
 import "@/style/markdown.scss";
 import BaseLayout from "./BaseLayout.astro";
 const { frontmatter } = Astro.props;
+const tags = [...frontmatter.tags.split(",").map((tag: string) => tag.trim())];
 ---
 
 <BaseLayout title={frontmatter.title}>
@@ -17,16 +18,20 @@ const { frontmatter } = Astro.props;
 
     <div class="tags">
       {
-        frontmatter.tags.split(",").map((tag: string) => (
-          <p class="tag">
-            <a href={`/tags/${tag}`}>{tag}</a>
-          </p>
-        ))
+        tags.map((tag: string) => {
+          tag = tag.trim();
+          return (
+            <p class="tag">
+              <a href={`/tags/${tag}`}>{tag}</a>
+            </p>
+          );
+        })
       }
     </div>
   </div>
 
-  <script is:inline
+  <script
+    is:inline
     src="https://utteranc.es/client.js"
     repo="hanjulcoding/hanjulcoding"
     issue-term="title"
@@ -36,24 +41,3 @@ const { frontmatter } = Astro.props;
     crossorigin="anonymous"
     async></script>
 </BaseLayout>
-
-<style>
-  a {
-    color: #00539f;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1rem 0;
-  }
-
-  .tag {
-    margin: 0.25rem;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5rem;
-    padding: 0.1rem 0.5rem;
-    font-size: 1rem;
-    background-color: #f8fcfd;
-  }
-</style>

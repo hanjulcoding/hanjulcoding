@@ -8,7 +8,7 @@ const entries = await contentfulClient.getEntries<BlogPost>({
   content_type: "blogPost",
 });
 
-const posts = entries.items.map((item) => {
+const posts = entries.items.map((item: BlogPost) => {
   const { title, date, description, slug } = item.fields;
   return {
     title,
@@ -20,20 +20,18 @@ const posts = entries.items.map((item) => {
 ---
 
 <BaseLayout title={"한줄코딩 - Blog"}>
-  <main>
-    <h1 class="text-2xl my-8">블로그</h1>
-    <ul>
-      {
-        posts.map((post) => (
-          <li>
-            <time>{post.date}</time>
-            <a class="text-slate-600 dark:text-slate-200" href={`/posts/blog/${post.slug}/`}>
-              <div class="text-base">{post.title}</div>
-              <div class="text-xs">{post.description}</div>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </main>
+  <h1 class="text-2xl my-8">블로그</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <time>{post.date}</time>
+          <a class="text-slate-600 dark:text-slate-200" href={`/posts/blog/${post.slug}/`}>
+            <div class="text-base">{post.title}</div>
+            <div class="text-xs">{post.description}</div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>

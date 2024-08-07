@@ -2,41 +2,34 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Greeting from "@/components/test/Greeting";
 
-const title = "About";
-
 const identity = {
   title: "한줄코딩",
-  categories: ["웹테크", "AI", "다양한 스킬", "테크블로그", "포트폴리오", "IT 관련 밈"],
+  categories: ["Web", "AI", "Library", "Tech Blog", "Portfolio", "IT 관련 밈", "세계 정복"],
 };
-
-const hanjulColor = "cornflowerblue";
 ---
 
 <BaseLayout title={"한줄코딩 - About"}>
-  <style define:vars={{ hanjulColor }}>
-    h1 {
-      color: var(--main);
-      font-size: 4rem;
-    }
-    .link {
-      color: var(--hanjulColor);
-      font-weight: bold;
-    }
-  </style>
-  <main class="text-center leading-10">
-    <h2 class="text-4xl mb-4">한줄코딩에 대해서</h2>
-
-    <p>
-      테크 뉴스, 트렌드, 그리고 개발자들을 위한 다양한 정보를 제공하는 사이트입니다.
-    </p>
-
-    <p>
-      아직 작업 중이고, 제 개인 <a class="link" href="https://6lueparr0t.github.io" target="_blank">포트폴리오</a> 작업이 완료되면 다시 업데이트 할 예정입니다.
-    </p>
-
-    <p>블로그는 앞으로</p>
-    <Greeting client:visible type={"visible"} messages={identity.categories} />
-
-    <p>같은 것들로 채워질 예정입니다.</p>
-  </main>
+  <div
+    class="min-h-screen text-gray-900 bg-white dark:bg-gray-950 dark:text-white flex flex-col justify-center items-center py-16"
+  >
+    <div
+      class="text-center text-gray-800 bg-gray-100 dark:bg-gray-800 dark:text-white shadow-2xl rounded-2xl p-12 w-full max-w-2xl border-gray-800"
+    >
+      <h1 class="text-4xl font-semibold mb-6">한줄코딩에 대해서</h1>
+      <div class="text-xl text-gray-900 dark:text-white mb-4">
+        <div class="mb-4">개발자들을 위한</div>
+        <span class="font-semibold text-gray-900 dark:text-white">
+          <a href="/trend" class="hover:text-sky-500"> Tech, AI </a>
+        </span>
+        <br />
+        <span class="font-semibold text-gray-900 dark:text-white">
+          <a href="/fun" class="hover:text-yellow-500"> 밈과 짤 😎 </a>
+        </span>
+      </div>
+      <p class="text-lg text-gray-900 dark:text-white mb-4">다양한 정보를 제공하는 사이트입니다.</p>
+      <p class="text-lg text-gray-900 dark:text-white">한줄코딩에서 제공하는</p>
+      <Greeting client:visible type={"visible"} messages={identity.categories} />
+      <p class="text-lg text-gray-900 dark:text-white">관련 소식을 확인해보세요.</p>
+    </div>
+  </div>
 </BaseLayout>

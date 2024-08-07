@@ -4,11 +4,16 @@ import Card from "@/components/Card.astro";
 ---
 
 <BaseLayout title="">
-  <main class="mx-auto p-4 w-[800px] max-w-[calc(100%-2rem)] text-[rgb(var(--foreground))] text-lg leading-relaxed">
-    <h1 class="font-['DungGeunMo'] text-gradient text-6xl m-4 text-center">Welcome to <span class="">한줄코딩</span></h1>
+  <main
+    class="mx-auto p-4 w-[800px] max-w-[calc(100%-2rem)] text-[rgb(var(--foreground))] text-lg leading-relaxed"
+  >
+    <h1 class="font-['DungGeunMo'] text-6xl m-4 text-center">
+      Welcome to <span class="">한줄코딩</span>
+    </h1>
 
     <p class="instructions">
-      이 프로젝트는 <code>Astro.js</code> 로 만들어졌으며, 현재 <strong>작업 중</strong> 입니다.<br />
+      이 프로젝트는 <code>Astro.js</code> 로 만들어졌으며, 현재 <strong>작업 중</strong> 입니다.<br
+      />
     </p>
     <ul role="list" class="link-card-grid">
       <Card
@@ -16,11 +21,7 @@ import Card from "@/components/Card.astro";
         title="Repository"
         body="현재 작업 중인 이 사이트의 Repo"
       />
-      <Card
-        href="https://6lueparr0t.github.io"
-        title="6lueparr0t's Home"
-        body="한줄코딩을 만든 개발자의 홈페이지"
-      />
+      <Card href="https://6lueparr0t.github.io" title="6lueparr0t's Home" body="개발자 홈페이지" />
     </ul>
   </main>
 </BaseLayout>
@@ -28,21 +29,16 @@ import Card from "@/components/Card.astro";
 <style>
   .instructions {
     margin-bottom: 2rem;
-    border: 1px solid rgba(var(--main-light), 25%);
-    background: linear-gradient(rgba(var(--main-dark), 66%), rgba(var(--main-dark), 33%));
+    border: 1px solid rgba(var(--foreground));
     padding: 1.5rem;
     border-radius: 8px;
   }
   .instructions code {
     font-size: 0.8rem;
     font-weight: bold;
-    background: rgba(var(--main-light), 12%);
-    color: rgb(var(--main-light));
+    border: 1px solid rgba(var(--foreground));
     border-radius: 4px;
     padding: 0.3rem 0.4rem;
-  }
-  .instructions strong {
-    color: rgb(var(--main-light));
   }
   .link-card-grid {
     display: grid;

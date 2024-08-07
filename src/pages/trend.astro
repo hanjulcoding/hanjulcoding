@@ -7,10 +7,8 @@ const trendPosts = await Astro.glob("./posts/trend/*.md");
 ---
 
 <BaseLayout title="한줄코딩 - Trend">
-  <main>
-    <h1 class="text-2xl my-8">IT 관련 소식들</h1>
-    <ul>
-      {trendPosts.map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
-    </ul>
-  </main>
+  <h1 class="text-2xl my-8">IT 관련 소식들</h1>
+  <ul>
+    {trendPosts.map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
+  </ul>
 </BaseLayout>

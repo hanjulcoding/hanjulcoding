@@ -1,13 +1,21 @@
 ---
+import "@/style/page.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const allPosts: Array<object> = await Astro.glob("../posts/**/*.md");
-const tags = [...new Set(allPosts.map((post: any) => (post.frontmatter.tags).split(",").map((tag:string)=>tag.trim())).flat())];
+const tags = [
+  ...new Set(
+    allPosts
+      .map((post: any) => post.frontmatter.tags.split(",").map((tag: string) => tag.trim()))
+      .flat()
+  ),
+];
 
 const title = "Tag Index";
 ---
 
 <BaseLayout title={title}>
+  <h1 class="text-2xl my-8">태그 리스트</h1>
   <div class="tags">
     {
       tags.map((tag) => (
@@ -18,24 +26,3 @@ const title = "Tag Index";
     }
   </div>
 </BaseLayout>
-
-<style>
-  a {
-    color: #00539f;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1rem 0;
-  }
-
-  .tag {
-    margin: 0.25rem;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5rem;
-    padding: 0.1rem 0.5rem;
-    font-size: 1rem;
-    background-color: #f8fcfd;
-  }
-</style>
