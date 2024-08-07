@@ -23,7 +23,7 @@ const { content, title, date } = Astro.props;
 ---
 
 <BaseLayout title={title}>
-  <h1 class="text-2xl my-8">{title}</h1>
+  <h1 class="text-2xl mb-8">{title}</h1>
   <time>{date}</time>
   <article set:html={content} />
   <script
