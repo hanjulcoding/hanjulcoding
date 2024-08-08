@@ -3,12 +3,13 @@ import "@/style/page.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { contentfulClient } from "@/lib/contentful";
 import type { BlogPost } from "@/lib/contentful";
+import type { Entry } from "contentful";
 
 const entries = await contentfulClient.getEntries<BlogPost>({
   content_type: "blogPost",
 });
 
-const posts = entries.items.map((item: BlogPost) => {
+const posts = entries.items.map((item: Entry<BlogPost, undefined, string>) => {
   const { title, date, description, slug } = item.fields;
   return {
     title,

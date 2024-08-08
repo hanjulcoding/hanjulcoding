@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-export default function Greeting({
-  type,
-  messages,
-}: {
-  type: "visible" | "load";
-  messages: string[];
-}) {
+export default function Greeting({ messages }: { messages: string[] }) {
   const messageList = () => messages[(count + 1) % messages.length];
 
   const [greeting, setGreeting] = useState(messages[0]);
