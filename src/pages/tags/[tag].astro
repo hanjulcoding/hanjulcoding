@@ -14,11 +14,13 @@ export async function getStaticPaths() {
   ];
 
   return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post: any) =>
-      post.frontmatter.tags
-        .split(",")
-        .map((item: string) => item.trim())
-        .includes(tag)
+    const filteredPosts = allPosts.filter((post: any) => {
+      const tagList = post.frontmatter.tags
+        ?.split(",")
+        .map((item: string) => item.trim()) || [];
+
+        return tagList.includes(tag);
+    }
     );
     return {
       params: { tag: tag },
