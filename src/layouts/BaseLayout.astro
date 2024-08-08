@@ -14,17 +14,25 @@ const { title } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="한줄코딩, hanjulcoding" />
+    <meta name="keywords" content="개발, 커뮤니티, frontend, 백엔드, devops, 프론트엔드, backend, 풀스택, fullstack, 웹 개발, web development, 모바일 개발, mobile development, 소프트웨어 엔지니어링, software engineering, 데이터 과학, data science, 머신러닝, machine learning, 클라우드 컴퓨팅, cloud computing, 사이버 보안, cybersecurity, 블록체인, blockchain, UI/UX 디자인, UI/UX design, 애자일 방법론, agile methodologies, 제품 관리, product management, 지속적 통합, continuous integration, 지속적 배포, continuous deployment, 테스트, testing, 품질 보증, quality assurance, 버전 관리, version control, Git, 자바스크립트, JavaScript, 타입스크립트, TypeScript, 파이썬, Python, 자바, Java, C#, PHP, 루비, Ruby, Node.js, 리액트, React, 앵귤러, Angular, 뷰, Vue.js, 도커, Docker, 쿠버네티스, Kubernetes, AWS, 애저, Azure, 구글 클라우드, Google Cloud, 경력 개발, career development, 구직, job hunting, 기술 면접, technical interviews, 코딩 도전, coding challenges, 시스템 설계, system design, 프리랜서, freelancing, 원격 근무, remote work" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title ?? "한줄코딩"}</title>
+    <meta name="author" content="6lueparr0t" />
+    <meta property="og:image" content="https://hanjulcoding.com/media/meta.webp" />
+    <meta property="og:url" content="https://hanjulcoding.com" />
+    <meta property="og:type" content="website" />
+    <title>{title || "한줄코딩"}</title>
   </head>
   <body>
     <Theme />
     <Header />
     <main>
-      <slot />
+      <div class="page">
+        <slot />
+      </div>
     </main>
     <Footer />
   </body>

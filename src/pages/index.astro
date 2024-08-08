@@ -5,7 +5,7 @@ import Card from "@/components/Card.astro";
 
 <BaseLayout title="">
   <main
-    class="min-h-[60vh] flex flex-col justify-center items-center mx-auto max-w-[calc(100%-2rem)] text-[rgb(var(--foreground))] text-lg leading-relaxed"
+    class="min-h-[60vh] flex flex-col justify-center items-center mx-auto max-w-[calc(100%-2rem)] text-[rgb(var(--foreground))] text-lg leading-relaxed m-4 sm:m-4"
   >
     <h1 class="font-['DungGeunMo'] text-6xl mt-4 mb-8 sm:mb-16 text-center">
       <span class="">한줄코딩</span>
@@ -33,9 +33,9 @@ import Card from "@/components/Card.astro";
 
 <style>
   .instructions {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border: 1px solid rgba(var(--foreground));
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 8px;
   }
   .instructions code {
@@ -43,13 +43,13 @@ import Card from "@/components/Card.astro";
     font-weight: bold;
     border: 1px solid rgba(var(--foreground));
     border-radius: 4px;
-    padding: 0.3rem 0.4rem;
+    padding: 0.2rem 0.4rem;
   }
   .link-card-grid {
     display: grid;
     /* grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr)); */
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1rem;
     padding: 0;
   }
 </style>

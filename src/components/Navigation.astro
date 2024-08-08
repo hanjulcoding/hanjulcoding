@@ -1,21 +1,29 @@
 ---
+const links = [
+  { href: "/", text: "home" },
+  { href: "/about", text: "about" },
+  { href: "/trend", text: "trend" },
+  { href: "/fun", text: "fun" },
+  { href: "/food", text: "food" },
+  { href: "/blog", text: "blog" },
+  { href: "/posts/qna", text: "qna" },
+];
+const isDevelopment = import.meta.env.NODE_ENV === "development";
 ---
 
 <div class="nav-links">
-  <a href="/">home</a>
-  <a href="/about">about</a>
-  <a href="/trend">trend</a>
-  <a href="/fun">fun</a>
-  <a href="/blog">blog</a>
-  {import.meta.env.NODE_ENV === "development" && (
-  <a
-    href="/admin/index.html"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="underline"
-  >
-    Admin
-  </a>
+  {links.map((link) => (
+    <a href={link.href} aria-label={link.text}>{link.text}</a>
+  ))}
+  {isDevelopment && (
+    <a
+      href="/admin/index.html"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="underline"
+    >
+      Admin
+    </a>
   )}
 </div>
 
@@ -44,7 +52,7 @@
   .nav-links a:hover,
   .nav-links a:focus {
     background-color: rgb(var(--foreground));
-    color:rgb(var(--background));
+    color: rgb(var(--background));
   }
 
   .expanded {

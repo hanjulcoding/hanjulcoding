@@ -2,7 +2,7 @@
 import "@/style/markdown.scss";
 import BaseLayout from "./BaseLayout.astro";
 const { frontmatter } = Astro.props;
-const tags = [...frontmatter.tags.split(",").map((tag: string) => tag.trim())];
+const tags = [...frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || []];
 ---
 
 <BaseLayout title={frontmatter.title}>
