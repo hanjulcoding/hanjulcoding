@@ -1,11 +1,13 @@
 ---
 import "@/style/page.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { pubDateSort } from "@/lib/utils";
 
 const allPosts: Array<object> = await Astro.glob("../posts/**/*.md");
 const tags = [
   ...new Set(
     allPosts
+      .sort(pubDateSort)
       .map((post: any) => post.frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || [])
       .flat()
   ),

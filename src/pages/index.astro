@@ -1,6 +1,17 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Card from "@/components/Card.astro";
+import { pubDateSort } from "@/lib/utils";
+
+const allPosts: Array<object> = await Astro.glob("./posts/**/*.md");
+const tags = [
+  ...new Set(
+    allPosts
+      .sort(pubDateSort)
+      .map((post: any) => post.frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || [])
+      .flat()
+  ),
+];
 ---
 
 <BaseLayout title="">
@@ -15,7 +26,8 @@ import Card from "@/components/Card.astro";
         이 프로젝트는 <code>Astro.js</code> 로 만들어졌으며, 현재 <strong>지속적으로 작업 중</strong>인 상태 입니다.<br
         />
       </p>
-      <ul role="list" class="link-card-grid">
+
+      <ul role="list" class="link-card-grid mb-4">
         <Card
           href="https://github.com/hanjulcoding/hanjulcoding"
           title="Repository"
@@ -27,12 +39,27 @@ import Card from "@/components/Card.astro";
           body="개발자 홈페이지"
         />
       </ul>
+
+      <div class="instructions">
+        {
+          tags.map((tag) => (
+          <a href={`/tags/${tag}`}>
+            <div class="inline-block tag m-2">
+              {tag}
+            </div>
+          </a>
+          ))
+        }
+      </div>
     </div>
+
+    
   </main>
 </BaseLayout>
 
 <style>
   .instructions {
+    max-width: 640px;;
     margin-bottom: 1rem;
     border: 1px solid rgba(var(--foreground));
     padding: 1rem;

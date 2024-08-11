@@ -5,7 +5,7 @@ title: 'Astro.js Tutorial : My First Blog Post'
 author: Astro Learner
 displayDate: 2024-06-14T00:00:00.000Z
 pubDate: 2024-06-14T00:00:00.000Z
-tags: 'astro, blogging, learning in public'
+tags: 'example, notice, astro, test'
 ---
 
 ## My First Blog Post

@@ -2,12 +2,14 @@
 import "@/style/page.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Post from "@/components/Post.astro";
+import { pubDateSort } from "@/lib/utils";
 
 export async function getStaticPaths() {
   const allPosts: Array<object> = await Astro.glob("../posts/**/*.md");
   const uniqueTags = [
     ...new Set(
       allPosts
+        .sort(pubDateSort)
         .map((post: any) => post.frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || [])
         .flat()
     ),

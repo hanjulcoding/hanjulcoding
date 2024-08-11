@@ -1,11 +1,11 @@
 ---
 category: food
 layout: ../../../layouts/MarkdownPostLayout.astro
-title: 규칙
+title: 맛집 평가 방법
 author: 발가락
 displayDate: 2024-08-12T00:00:00.000Z
 pubDate: 2024-08-11T16:30:00.549Z
-tags: 'notice, food'
+tags: 'example, notice, food'
 ---
 
 ### 맛집 평가 해석
