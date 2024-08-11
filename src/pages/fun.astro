@@ -9,6 +9,6 @@ const funPosts = await Astro.glob("./posts/fun/*.{md,mdx}");
 <BaseLayout title="한줄코딩 - Fun">
   <h1 class="text-2xl mb-8">밈 & 짤</h1>
   <ul>
-    {funPosts.map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
+    {funPosts.reverse().map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
   </ul>
 </BaseLayout>

@@ -41,7 +41,7 @@ export default defineConfig({
               component: ({ input }) => {
                 return (
                   <>
-                    <Input {...input} type="hidden"/>
+                    <Input {...input} type="hidden" />
                   </>
                 );
               },
@@ -62,13 +62,26 @@ export default defineConfig({
           },
           {
             type: "datetime",
-            name: "pubDate",
+            name: "displayDate",
             label: "Date Posted",
             ui: {
               dateFormat: "YYYY-MM-DD",
               parse: (value: any) => value && value.format("YYYY-MM-DD"),
             },
             required: true,
+          },
+          {
+            type: "datetime",
+            name: "generatedDate", // 업데이트 된 시간
+            ui: {
+              component: ({ input }) => {
+                return (
+                  <>
+                    <Input {...input} type="hidden" />
+                  </>
+                );
+              },
+            },
           },
           {
             type: "rich-text",
@@ -106,13 +119,15 @@ export default defineConfig({
           }) => {
             if (form.crudType === "create") {
               return {
-                layout: "../../../layouts/MarkdownPostLayout.astro",
                 ...values,
+                layout: "../../../layouts/MarkdownPostLayout.astro",
+                generatedDate: new Date().toISOString(),
               };
             } else {
               return {
-                layout: "../../../layouts/MarkdownPostLayout.astro",
                 ...values,
+                layout: "../../../layouts/MarkdownPostLayout.astro",
+                generatedDate: new Date().toISOString(),
               };
             }
           },

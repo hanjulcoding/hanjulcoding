@@ -9,7 +9,7 @@
   h4,
   h5,
   h6 {
-    margin: 1.5em 0 1em;
+    margin: 2rem 0;
     font-weight: 600;
     line-height: 1.25;
   }
@@ -101,17 +101,26 @@
 
   ul,
   ol {
-    margin: 0.5em 0;
-    padding-left: 2em;
+    margin: 0.5rem 0;
+    padding-left: 1rem;
 
     li {
-      margin-bottom: 0.5em;
+      margin-bottom: 0.5rem;
 
       p {
-        margin-bottom: 0.5em;
+        margin-bottom: 0.5rem;
       }
     }
   }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
 
   table {
     width: 100%;

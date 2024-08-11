@@ -9,6 +9,6 @@ const foodPosts = await Astro.glob("./posts/food/*.{md,mdx}");
 <BaseLayout title="한줄코딩 - food">
   <h1 class="text-2xl mb-8">객관적인 맛집 투어</h1>
   <ul>
-    {foodPosts.map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
+    {foodPosts.reverse().map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
   </ul>
 </BaseLayout>
