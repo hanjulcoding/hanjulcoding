@@ -18,6 +18,20 @@ const tags = [...frontmatter.tags?.split(",").map((tag: string) => tag.trim()) |
           p.replaceWith(document.createElement('br'));
         }
       });
+
+      // Get all <a> elements
+      const links = markdownContainer.querySelectorAll('a');
+      // Get the hostname of the current page
+      const currentHostname = window.location.hostname;
+
+      links.forEach(anchor => {
+        // Check if the link is external
+        if (anchor.hostname !== currentHostname) {
+            // Add target="_blank" and rel="noopener noreferrer" attributes
+            anchor.setAttribute('target', '_blank');
+            anchor.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
     }
   });
 </script>
