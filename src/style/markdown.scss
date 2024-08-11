@@ -44,14 +44,27 @@
     line-height: 1.6;
   }
 
-  a {
-    color: #0366d6;
-    text-decoration: none;
-
-    &:hover {
+  &.food {
+    a {
       text-decoration: underline;
+      text-decoration-color: #ef4444;
     }
   }
+
+  &.tech {
+    a {
+      text-decoration: underline;
+      text-decoration-color: #0366d6;
+    }
+  }
+
+  &.meme {
+    a {
+      text-decoration: underline;
+      text-decoration-color: #eab308;
+    }
+  }
+
 
   strong {
     font-weight: 600;

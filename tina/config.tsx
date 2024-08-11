@@ -63,7 +63,7 @@ export default defineConfig({
           {
             type: "datetime",
             name: "displayDate",
-            label: "Date Posted",
+            label: "Display Date",
             ui: {
               dateFormat: "YYYY-MM-DD",
               parse: (value: any) => value && value.format("YYYY-MM-DD"),

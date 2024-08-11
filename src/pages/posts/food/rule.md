@@ -1,11 +1,9 @@
 ---
-pubDate: '2024-08-11T16:15:56.233Z'
-updatedDate: '2024-08-11T16:17:39.579Z'
 layout: ../../../layouts/MarkdownPostLayout.astro
 title: 규칙
 author: 발가락
 displayDate: 2024-08-12T00:00:00.000Z
-generatedDate: 2024-08-11T16:30:00.549Z
+generatedDate: 2024-08-11T16:15:56.233Z
 tags: 'notice, food'
 ---
 

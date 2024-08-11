@@ -2,7 +2,8 @@
 layout: ../../../layouts/MarkdownPostLayout.astro
 title: 'Astro.js Tutorial : My First Blog Post'
 author: Astro Learner
-pubDate: 2024-06-14T00:00:00.000Z
+displayDate: 2024-06-14T00:00:00.000Z
+generatedDate: 2024-06-14T00:00:00.000Z
 tags: 'astro, blogging, learning in public'
 ---
 
@@ -21,3 +22,7 @@ Welcome to my *new blog* about learning Astro! Here, I will share my learning jo
 ## What's next
 
 I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+
+```javascript
+console.log("Hello, World!");
+```

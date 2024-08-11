@@ -2,7 +2,8 @@
 layout: ../../../layouts/MarkdownPostLayout.astro
 title: 맛집 올릴 예정
 author: 발가락
-pubDate: 2024-08-08T00:00:00.000Z
+displayDate: 2024-08-11T00:00:00.000Z
+generatedDate: 2024-08-08T00:00:00.000Z
 tags: 'notice, food, 맛집'
 ---
 

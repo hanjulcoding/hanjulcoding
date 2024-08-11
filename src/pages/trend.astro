@@ -2,13 +2,14 @@
 import "@/style/page.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Post from "@/components/Post.astro";
+import { generatedDateSort } from "@/lib/utils";
 
-const trendPosts = await Astro.glob("./posts/trend/*.md");
+const trendPosts = (await Astro.glob("./posts/trend/*.md")).sort(generatedDateSort);
 ---
 
 <BaseLayout title="한줄코딩 - Trend">
   <h1 class="text-2xl mb-8">IT 관련 소식들</h1>
   <ul>
-    {trendPosts.reverse().map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
+    {trendPosts.map((post) => <Post url={post.url} title={post.frontmatter.title} />)}
   </ul>
 </BaseLayout>
