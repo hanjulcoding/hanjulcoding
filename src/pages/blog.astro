@@ -9,7 +9,7 @@ const entries = await contentfulClient.getEntries<BlogPost>({
   content_type: "blogPost",
 });
 
-const posts = entries.items.map((item: Entry<BlogPost, undefined, string>) => {
+const posts = entries.items.reverse().map((item: Entry<BlogPost, undefined, string>) => {
   const { title, date, description, slug } = item.fields;
   return {
     title,
