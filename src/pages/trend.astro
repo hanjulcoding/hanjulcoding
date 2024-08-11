@@ -2,9 +2,9 @@
 import "@/style/page.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Post from "@/components/Post.astro";
-import { generatedDateSort } from "@/lib/utils";
+import { pubDateSort } from "@/lib/utils";
 
-const trendPosts = (await Astro.glob("./posts/trend/*.md")).sort(generatedDateSort);
+const trendPosts = (await Astro.glob("./posts/trend/*.md")).sort(pubDateSort);
 ---
 
 <BaseLayout title="한줄코딩 - Trend">

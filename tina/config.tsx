@@ -48,6 +48,30 @@ export default defineConfig({
             },
           },
           {
+            type: 'string',
+            name: 'category',
+            label: 'Category',
+            list: false,
+            options: [
+              {
+                value: "trend",
+                label: "Trend"
+              },
+              {
+                value: "meme",
+                label: "Meme"
+              },
+              {
+                value: "food",
+                label: "Food"
+              },
+              {
+                value: "qna",
+                label: "QnA"
+              }
+            ]
+          },
+          {
             type: "string",
             name: "title",
             label: "Title",
@@ -72,7 +96,7 @@ export default defineConfig({
           },
           {
             type: "datetime",
-            name: "generatedDate", // 업데이트 된 시간
+            name: "pubDate", // !DO NOT CHANGE THIS FIELD NAME
             ui: {
               component: ({ input }) => {
                 return (
@@ -121,13 +145,13 @@ export default defineConfig({
               return {
                 ...values,
                 layout: "../../../layouts/MarkdownPostLayout.astro",
-                generatedDate: new Date().toISOString(),
+                pubDate: new Date().toISOString(),
               };
             } else {
               return {
                 ...values,
                 layout: "../../../layouts/MarkdownPostLayout.astro",
-                generatedDate: new Date().toISOString(),
+                pubDate: new Date().toISOString(),
               };
             }
           },

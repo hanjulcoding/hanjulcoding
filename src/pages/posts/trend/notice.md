@@ -1,9 +1,10 @@
 ---
+category: trend
 layout: ../../../layouts/MarkdownPostLayout.astro
 title: 'Astro.js Tutorial : My First Blog Post'
 author: Astro Learner
 displayDate: 2024-06-14T00:00:00.000Z
-generatedDate: 2024-06-14T00:00:00.000Z
+pubDate: 2024-06-14T00:00:00.000Z
 tags: 'astro, blogging, learning in public'
 ---
 

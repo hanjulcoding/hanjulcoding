@@ -1,9 +1,10 @@
 ---
+category: food
 layout: ../../../layouts/MarkdownPostLayout.astro
 title: 규칙
 author: 발가락
 displayDate: 2024-08-12T00:00:00.000Z
-generatedDate: 2024-08-11T16:15:56.233Z
+pubDate: 2024-08-11T16:30:00.549Z
 tags: 'notice, food'
 ---
 
