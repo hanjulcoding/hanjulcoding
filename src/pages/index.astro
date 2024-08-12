@@ -16,16 +16,16 @@ const tags = [
 
 <BaseLayout title="">
   <main
-    class="min-h-[60vh] flex flex-col justify-center items-center mx-auto max-w-[calc(100%-2rem)] text-[rgb(var(--foreground))] text-lg leading-relaxed m-4 sm:m-4"
+    class="min-h-[60vh] max-w-[calc(100%-2rem)] flex flex-col justify-center items-center mx-auto text-[rgb(var(--foreground))] text-lg leading-relaxed m-4 sm:m-4"
   >
     <h1 class="font-['DungGeunMo'] text-6xl mt-4 mb-8 sm:mb-16 text-center">
       <span class="">한줄코딩</span>
     </h1>
-    <div>
-      <p class="instructions">
+    <div class="">
+      <div class="instructions">
         이 프로젝트는 <code>Astro.js</code> 로 만들어졌으며, 현재 <strong>지속적으로 작업 중</strong>인 상태 입니다.<br
         />
-      </p>
+      </div>
 
       <ul role="list" class="link-card-grid mb-4">
         <Card
@@ -57,27 +57,3 @@ const tags = [
     </div>
   </main>
 </BaseLayout>
-
-<style>
-  .instructions {
-    max-width: 640px;;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(var(--foreground));
-    padding: 1rem;
-    border-radius: 8px;
-  }
-  .instructions code {
-    font-size: 0.8rem;
-    font-weight: bold;
-    border: 1px solid rgba(var(--foreground));
-    border-radius: 4px;
-    padding: 0.2rem 0.4rem;
-  }
-  .link-card-grid {
-    display: grid;
-    /* grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr)); */
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding: 0;
-  }
-</style>

@@ -179,6 +179,21 @@
     font-family: "Noto Sans KR", sans-serif;
   }
 
+  .instructions {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(var(--foreground));
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .link-card-grid {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr)); */
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 0;
+  }
+
   .tags {
     display: flex;
     flex-wrap: wrap;
