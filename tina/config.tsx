@@ -62,10 +62,6 @@ export default defineConfig({
                 label: "Meme"
               },
               {
-                value: "food",
-                label: "Food"
-              },
-              {
                 value: "qna",
                 label: "QnA"
               }

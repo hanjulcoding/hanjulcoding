@@ -186,10 +186,11 @@
   }
 
   .tag {
+    display: inline-block;
     margin: 0.25rem;
     border: 1px solid rgba(var(--background));
     border-radius: 0.25rem;
-    padding: .5rem;
+    padding: .1rem .5rem;
     font-size: 1rem;
     background-color: rgba(var(--foreground));
     color: rgba(var(--background));

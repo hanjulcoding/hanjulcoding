@@ -41,10 +41,13 @@ const tags = [
       </ul>
 
       <div class="instructions">
+        <p class="ml-2 mb-2">
+          Tags
+        </p>
         {
           tags.map((tag) => (
           <a href={`/tags/${tag}`}>
-            <div class="inline-block tag m-2">
+            <div class="inline-block tag m-1">
               {tag}
             </div>
           </a>
@@ -52,8 +55,6 @@ const tags = [
         }
       </div>
     </div>
-
-    
   </main>
 </BaseLayout>
 
