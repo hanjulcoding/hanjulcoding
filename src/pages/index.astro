@@ -1,17 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Card from "@/components/Card.astro";
-import { pubDateSort } from "@/lib/utils";
-
-const allPosts: Array<object> = await Astro.glob("./posts/**/*.md");
-const tags = [
-  ...new Set(
-    allPosts
-      .sort(pubDateSort)
-      .map((post: any) => post.frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || [])
-      .flat()
-  ),
-];
 ---
 
 <BaseLayout title="">
@@ -39,21 +28,6 @@ const tags = [
           body="개발자 홈페이지"
         />
       </ul>
-
-      <div class="instructions">
-        <p class="ml-2 mb-2">
-          Tags
-        </p>
-        {
-          tags.map((tag) => (
-          <a href={`/tags/${tag}`}>
-            <div class="inline-block tag m-1">
-              {tag}
-            </div>
-          </a>
-          ))
-        }
-      </div>
     </div>
   </main>
 </BaseLayout>

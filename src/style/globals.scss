@@ -204,12 +204,12 @@
     display: inline-block;
     margin: 0.25rem;
     border: 1px solid rgba(var(--background));
-    border-radius: 0.25rem;
-    padding: .1rem .5rem;
-    font-size: 1rem;
+    border-radius: 2.5rem;
+    padding: .1rem 1rem;
     background-color: rgba(var(--foreground));
     color: rgba(var(--background));
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 2rem;
     cursor: pointer;
 
     &:hover {

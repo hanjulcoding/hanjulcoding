@@ -1,0 +1,37 @@
+---
+import "@/style/page.scss";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Post from "@/components/Post.astro";
+import { pubDateSort } from "@/lib/utils";
+
+const posts: Array<object> = await Astro.glob("../posts/**/*.md");
+const tags = [
+  ...new Set(
+    posts
+      .sort(pubDateSort)
+      .map((post: any) => post.frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || [])
+      .flat()
+  ),
+];
+
+const title = "Tag Index";
+---
+
+<BaseLayout title={title}>
+  <h1 class="mb-8">
+  {
+    tags.map((tag) => (
+    <a href={`/blog/${tag}`}>
+      <div class="tag">
+        {tag}
+      </div>
+    </a>
+    ))
+  }
+  </h1>
+  <div>
+    <ul>
+      {posts.map((post: any) => <Post url={post.url} title={post.frontmatter.title} />)}
+    </ul>
+  </div>
+</BaseLayout>

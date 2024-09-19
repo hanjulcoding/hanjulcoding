@@ -48,24 +48,24 @@ export default defineConfig({
             },
           },
           {
-            type: 'string',
-            name: 'category',
-            label: 'Category',
+            type: "string",
+            name: "category",
+            label: "Category",
             list: false,
             options: [
               {
                 value: "trend",
-                label: "Trend"
+                label: "Trend",
               },
               {
                 value: "meme",
-                label: "Meme"
+                label: "Meme",
               },
               {
                 value: "qna",
-                label: "QnA"
-              }
-            ]
+                label: "QnA",
+              },
+            ],
           },
           {
             type: "string",
@@ -140,13 +140,13 @@ export default defineConfig({
             if (form.crudType === "create") {
               return {
                 ...values,
-                layout: "../../../layouts/MarkdownPostLayout.astro",
+                layout: "../../layouts/MarkdownPostLayout.astro",
                 pubDate: new Date().toISOString(),
               };
             } else {
               return {
                 ...values,
-                layout: "../../../layouts/MarkdownPostLayout.astro",
+                layout: "../../layouts/MarkdownPostLayout.astro",
                 pubDate: new Date().toISOString(),
               };
             }
