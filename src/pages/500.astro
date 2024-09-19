@@ -1,0 +1,24 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+<BaseLayout title="Internal Server Error" isError={true}>
+  <div
+    id="error-page"
+    class="flex flex-col gap-8 justify-center items-center h-screen"
+  >
+    <h1 class="text-4xl font-bold">Oops!</h1>
+    <div class="w-[600px]">
+      <img src={`https://http.cat/500`} alt="error cat" />
+    </div>
+    <p>Sorry, an unexpected error has occurred.</p>
+    <p class="text-zinc-400">
+      <i>Internal Server Error</i>
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+// setTimeout(() => {
+//   window.location.href = "/";
+// }, 2000);
+</script>

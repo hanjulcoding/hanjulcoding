@@ -1,0 +1,24 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+<BaseLayout title="Page Not Found" isError={true}>
+  <div
+    id="error-page"
+    class="flex flex-col gap-8 justify-center items-center h-screen"
+  >
+    <h1 class="text-4xl font-bold">Oops!</h1>
+    <div class="w-[600px]">
+      <img src={`https://http.cat/404`} alt="error cat" />
+    </div>
+    <p>Sorry, an unexpected error has occurred.</p>
+    <p class="text-zinc-400">
+      <i>Page Not Found</i>
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+// setTimeout(() => {
+//   window.location.href = "/";
+// }, 2000);
+</script>
