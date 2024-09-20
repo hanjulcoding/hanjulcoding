@@ -1,5 +1,6 @@
 ---
 import "@/style/page.scss";
+import Post from "@/components/Post.astro";
 import dayjs from 'dayjs';
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { contentfulClient } from "@/lib/contentful";
@@ -22,18 +23,9 @@ const posts = entries.items.reverse().map((item: Entry<BlogPost, undefined, stri
 ---
 
 <BaseLayout title={"한줄코딩 - Blog"}>
-  <h1 class="text-2xl mb-8">블로그</h1>
-  <ul>
+  <div class="space-y-4">
     {
-      posts.map((post) => (
-        <li>
-          <time>{post.publishedDate}</time>
-          <a class="text-slate-600 dark:text-slate-200" href={`/blog/${post.slug}/`}>
-            <div class="text-base">{post.title}</div>
-            <div class="text-xs">{post.description}</div>
-          </a>
-        </li>
-      ))
+      posts.map((post) => <Post url={`/blog/${post.slug}/`} title={post.title} pubDate={post.publishedDate}/>)
     }
-  </ul>
+  </div>
 </BaseLayout>

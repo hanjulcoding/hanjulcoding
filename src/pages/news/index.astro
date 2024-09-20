@@ -21,7 +21,7 @@ const title = "Tag Index";
   <h1 class="mb-8">
   {
     tags.map((tag) => (
-    <a href={`/blog/${tag}`}>
+    <a href={`/news/${tag}`}>
       <div class="tag">
         {tag}
       </div>
@@ -29,9 +29,7 @@ const title = "Tag Index";
     ))
   }
   </h1>
-  <div>
-    <ul>
-      {posts.map((post: any) => <Post url={post.url} title={post.frontmatter.title} />)}
-    </ul>
+  <div class="space-y-4">
+    {posts.map((post: any) => <Post url={post.url} title={post.frontmatter.title} pubDate={post.frontmatter.pubDate}/>)}
   </div>
 </BaseLayout>

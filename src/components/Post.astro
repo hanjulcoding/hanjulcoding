@@ -1,5 +1,9 @@
 ---
-const { title, url } = Astro.props;
+import dayjs from 'dayjs';
+const { title, url, pubDate } = Astro.props;
 ---
 
-<li><a class="text-slate-600 dark:text-slate-200" href={url}>{title}</a></li>
+<div class="flex flex-col">
+  <time>{dayjs(pubDate).format('YYYY-MM-DD')}</time>
+  <a class="text-slate-600 dark:text-slate-200" href={url}>{title}</a>
+</div>
