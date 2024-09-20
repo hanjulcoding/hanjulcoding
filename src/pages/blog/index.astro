@@ -1,37 +1,36 @@
 ---
 import "@/style/page.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Post from "@/components/Post.astro";
-import { pubDateSort } from "@/lib/utils";
+import { contentfulClient } from "@/lib/contentful";
+import type { BlogPost } from "@/lib/contentful";
+import type { Entry } from "contentful";
 
-const posts: Array<object> = await Astro.glob("../posts/**/*.md");
-const tags = [
-  ...new Set(
-    posts
-      .sort(pubDateSort)
-      .map((post: any) => post.frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || [])
-      .flat()
-  ),
-];
+const entries = await contentfulClient.getEntries<BlogPost>({
+  content_type: "pageBlogPost",
+});
 
-const title = "Tag Index";
+const posts = entries.items.reverse().map((item: Entry<BlogPost, undefined, string>) => {
+  const { title, description, slug } = item.fields;
+  return {
+    title,
+    slug,
+    description,
+  };
+});
 ---
 
-<BaseLayout title={title}>
-  <h1 class="mb-8">
-  {
-    tags.map((tag) => (
-    <a href={`/blog/${tag}`}>
-      <div class="tag">
-        {tag}
-      </div>
-    </a>
-    ))
-  }
-  </h1>
-  <div>
-    <ul>
-      {posts.map((post: any) => <Post url={post.url} title={post.frontmatter.title} />)}
-    </ul>
-  </div>
+<BaseLayout title={"한줄코딩 - Blog"}>
+  <h1 class="text-2xl mb-8">블로그</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a class="text-slate-600 dark:text-slate-200" href={`/blog/${post.slug}/`}>
+            <div class="text-base">{post.title}</div>
+            <div class="text-xs">{post.description}</div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>
