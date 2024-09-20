@@ -1,9 +1,11 @@
 ---
 import "@/style/markdown.scss";
 import BaseLayout from "./BaseLayout.astro";
-const { frontmatter } = Astro.props;
+const { frontmatter, title } = Astro.props;
 const category = frontmatter?.category || "";
-const tags = [...frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || []];
+const tags = frontmatter?.tags
+  ? frontmatter.tags.split(",").map((tag: string) => tag.trim())
+  : [];
 ---
 
 <script is:inline>
@@ -36,12 +38,12 @@ const tags = [...frontmatter.tags?.split(",").map((tag: string) => tag.trim()) |
   });
 </script>
 
-<BaseLayout title={frontmatter.title}>
+<BaseLayout title={frontmatter?.title || title}>
   <div class="p-8 w-full md:w-3/4 lg:w-1/2 m-auto">
-    <p class="text-gray-800 dark:text-gray-200 text-2xl">{frontmatter.title}</p>
+    {frontmatter?.title && <p class="text-gray-800 dark:text-gray-200 text-2xl">{frontmatter?.title}</p>}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mt-6">
-      <p class="stext-gray-800 dark:text-gray-300">{frontmatter.author}</p>
-      <p class="mt-2 md:mt-0 text-gray-500 dark:text-gray-400">{frontmatter.displayDate.toString().slice(0, 10)}</p>
+      <p class="stext-gray-800 dark:text-gray-300">{frontmatter?.author || ''}</p>
+      <p class="mt-2 md:mt-0 text-gray-500 dark:text-gray-400">{frontmatter?.displayDate.toString().slice(0, 10) || ''}</p>
     </div>
 
     <div id="markdown" class={`${category} my-8`}>

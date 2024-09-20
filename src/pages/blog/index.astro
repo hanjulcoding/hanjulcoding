@@ -1,5 +1,6 @@
 ---
 import "@/style/page.scss";
+import dayjs from 'dayjs';
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { contentfulClient } from "@/lib/contentful";
 import type { BlogPost } from "@/lib/contentful";
@@ -10,11 +11,12 @@ const entries = await contentfulClient.getEntries<BlogPost>({
 });
 
 const posts = entries.items.reverse().map((item: Entry<BlogPost, undefined, string>) => {
-  const { title, description, slug } = item.fields;
+  const { title, publishedDate, description, slug } = item.fields;
   return {
     title,
     slug,
     description,
+    publishedDate: dayjs(publishedDate).format('YYYY-MM-DD'),
   };
 });
 ---
@@ -25,6 +27,7 @@ const posts = entries.items.reverse().map((item: Entry<BlogPost, undefined, stri
     {
       posts.map((post) => (
         <li>
+          <time>{post.publishedDate}</time>
           <a class="text-slate-600 dark:text-slate-200" href={`/blog/${post.slug}/`}>
             <div class="text-base">{post.title}</div>
             <div class="text-xs">{post.description}</div>

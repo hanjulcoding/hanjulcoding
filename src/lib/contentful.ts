@@ -1,10 +1,10 @@
-import * as contentful from "contentful";
+import { type EntryFieldTypes, createClient } from "contentful";
 
 type AvatarImageEntrySkeleton = {
-  contentType: contentful.EntryFieldTypes.Text;
+  contentType: EntryFieldTypes.Text;
   details: {
-    image: { width: contentful.EntryFieldTypes.Number; height: contentful.EntryFieldTypes.Number };
-    size: contentful.EntryFieldTypes.Number;
+    image: { width: EntryFieldTypes.Number; height: EntryFieldTypes.Number };
+    size: EntryFieldTypes.Number;
   };
   fileName: string;
   url: string;
@@ -21,8 +21,8 @@ type ImageEntrySkeleton = {
 type AvatarEntrySkeleton = {
   contentTypeId: "avatar";
   fields: {
-    title: contentful.EntryFieldTypes.Text;
-    description: contentful.EntryFieldTypes.Text;
+    title: EntryFieldTypes.Text;
+    description: EntryFieldTypes.Text;
     file: AvatarImageEntrySkeleton;
   };
 };
@@ -30,7 +30,7 @@ type AvatarEntrySkeleton = {
 type AuthorEntrySkeleton = {
   contentTypeId: "author";
   fields: {
-    internalName: contentful.EntryFieldTypes.Text;
+    internalName: EntryFieldTypes.Text;
     name: string;
     avatar: AvatarEntrySkeleton;
   };
@@ -39,21 +39,19 @@ type AuthorEntrySkeleton = {
 export interface BlogPost {
   contentTypeId: "pageBlogPost";
   fields: {
-    internalName: contentful.EntryFieldTypes.Text;
-    slug: contentful.EntryFieldTypes.Text;
-    author: contentful.EntryFieldTypes.Object<AuthorEntrySkeleton>;
-    date: contentful.EntryFieldTypes.Date;
-    title: contentful.EntryFieldTypes.Text;
-    description: contentful.EntryFieldTypes.Text;
-    featuredImage: contentful.EntryFieldTypes.Object<ImageEntrySkeleton>;
-    content: contentful.EntryFieldTypes.RichText;
-    relatedBlogPosts: contentful.EntryFieldTypes.Array<
-      contentful.EntryFieldTypes.EntryLink<BlogPost>
-    >;
+    internalName: EntryFieldTypes.Text;
+    slug: EntryFieldTypes.Text;
+    author: EntryFieldTypes.Object<AuthorEntrySkeleton>;
+    publishedDate: EntryFieldTypes.Date;
+    title: EntryFieldTypes.Text;
+    description: EntryFieldTypes.Text;
+    featuredImage: EntryFieldTypes.Object<ImageEntrySkeleton>;
+    content: EntryFieldTypes.RichText;
+    relatedBlogPosts: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<BlogPost>>;
   };
 }
 
-export const contentfulClient = contentful.createClient({
+export const contentfulClient = createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV
     ? import.meta.env.CONTENTFUL_PREVIEW_TOKEN
