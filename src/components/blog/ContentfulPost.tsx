@@ -44,8 +44,9 @@ const ContentfulPost = () => {
   return (
     <>
       <h1>{post?.title}</h1>
-      <div>
-        {post?.authorName} {dayjs(post?.publishedDate).format("YYYY-MM-DD")}
+      <div className="flex justify-between">
+        <div>{post?.authorName}</div>
+        <div>{dayjs(post?.publishedDate).format("YYYY-MM-DD HH:mm:ss")}</div>
       </div>
       <img src={post?.featuredImage} alt={post?.title} />
       {/* content가 존재할 때만 HTML 렌더링 */}
