@@ -5,9 +5,10 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import parse from "html-react-parser";
 
-import ContentfulImage from "@/components/blog/ContentfulImage";
+import ContentfulImage from "@/components/contentful/ContentfulImage";
 
 const ContentfulPost = () => {
+  const [loading, setLoading] = useState(true);
   const [post, setPost] = useState<BlogPost | null>(null);
 
   // 이미지 처리용 커스텀 렌더링 옵션
@@ -29,6 +30,7 @@ const ContentfulPost = () => {
       }
 
       setPost(response);
+      setLoading(false);
       return response;
     }
 
@@ -43,24 +45,26 @@ const ContentfulPost = () => {
 
   return (
     <>
-      <h1>{post?.title}</h1>
-      <div className="flex justify-between">
-        <div>{post?.authorName}</div>
-        <div>{dayjs(post?.publishedDate).format("YYYY-MM-DD HH:mm:ss")}</div>
-      </div>
-      <img src={post?.featuredImage} alt={post?.title} />
-      {/* content가 존재할 때만 HTML 렌더링 */}
-      {post?.content ? (
-        parse(documentToHtmlString(post.content, options), {
-          replace: (domNode) => {
-            // 특정 태그를 React 컴포넌트로 변환
-            if ((domNode as any)?.name === "contentfulimage") {
-              if ("attribs" in domNode) {
-                return <ContentfulImage assetId={domNode.attribs.assetid || ""} />;
+      {loading === false && post?.content ? (
+        <>
+          <h1>{post?.title}</h1>
+          <div className="flex justify-between">
+            <div>{post?.authorName}</div>
+            <div>{dayjs(post?.publishedDate).format("YYYY-MM-DD HH:mm:ss")}</div>
+          </div>
+          <img src={post?.featuredImage} alt={post?.title} />
+          {/* content가 존재할 때만 HTML 렌더링 */}
+          {parse(documentToHtmlString(post.content, options), {
+            replace: (domNode) => {
+              // 특정 태그를 React 컴포넌트로 변환
+              if ((domNode as any)?.name === "contentfulimage") {
+                if ("attribs" in domNode) {
+                  return <ContentfulImage assetId={domNode.attribs.assetid || ""} />;
+                }
               }
-            }
-          },
-        })
+            },
+          })}
+        </>
       ) : (
         <p>Loading...</p>
       )}
