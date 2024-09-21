@@ -3,21 +3,16 @@ import "@/style/page.scss";
 import Post from "@/components/Post.astro";
 import dayjs from 'dayjs';
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { contentfulClient } from "@/lib/contentful";
-import type { BlogPost } from "@/lib/contentful";
-import type { Entry } from "contentful";
 
-const entries = await contentfulClient.getEntries<BlogPost>({
-  content_type: "pageBlogPost",
-});
+import { client, type BlogPost } from "@/lib/contentful";
 
-const posts = entries.items.reverse().map((item: Entry<BlogPost, undefined, string>) => {
-  const { title, publishedDate, description, slug } = item.fields;
+const posts = (await client.getAllPosts()).map((post: BlogPost) => {
   return {
-    title,
-    slug,
-    description,
-    publishedDate: dayjs(publishedDate).format('YYYY-MM-DD'),
+    id: post.id,
+    title: post.title,
+    publishedDate: dayjs(post.publishedDate).format('YYYY-MM-DD'),
+    featuredImage: post.featuredImage,
+    authorName: post.authorName,
   };
 });
 ---
@@ -25,7 +20,7 @@ const posts = entries.items.reverse().map((item: Entry<BlogPost, undefined, stri
 <BaseLayout title={"한줄코딩 - Blog"}>
   <div class="space-y-4">
     {
-      posts.map((post) => <Post url={`/blog/${post.slug}/`} title={post.title} pubDate={post.publishedDate}/>)
+      posts.map((post: BlogPost) => <Post url={`/blog/post?id=${post.id}`} title={post.title} pubDate={post.publishedDate}/>)
     }
   </div>
 </BaseLayout>

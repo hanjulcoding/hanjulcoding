@@ -1,0 +1,8 @@
+---
+import MarkdownPostLayout from "@/layouts/MarkdownPostLayout.astro";
+import ContentfulPost from "@/components/blog/ContentfulPost";
+---
+
+<MarkdownPostLayout title={''}>
+  <ContentfulPost client:only="react" />
+</MarkdownPostLayout>
