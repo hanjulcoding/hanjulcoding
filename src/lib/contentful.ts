@@ -101,7 +101,7 @@ async function getSinglePost(id: string): Promise<BlogPost> {
     id: id,
     title: post.title,
     publishedDate: post.publishedDate,
-    content: post.content,
+    content: post.content.json,
     featuredImage: post.featuredImage.url,
     authorName: post.author.name,
   };
@@ -131,4 +131,21 @@ async function getAuthor(id: string): Promise<Author> {
   return json.data.componentAuthor;
 }
 
-export const client = { getAllPosts, getSinglePost, getAuthor };
+async function getRichImage(id: string) {
+  const query = `
+    query ($id: String!) {
+      componentRichImage(id: $id) {
+        internalName
+        image {
+          url
+        }
+      }
+    }`;
+
+  const variables = { id };
+  const response = await apiCall(query, variables); // Contentful API 호출
+  const json = await response.json();
+  return json.data.componentRichImage;
+}
+
+export const client = { getAllPosts, getSinglePost, getAuthor, getRichImage };
