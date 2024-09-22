@@ -1,0 +1,8 @@
+---
+import MarkdownPostLayout from "@/layouts/MarkdownPostLayout.astro";
+import ContentfulPost from "@/components/contentful/ContentfulPost";
+---
+
+<MarkdownPostLayout>
+  <ContentfulPost client:load />
+</MarkdownPostLayout>
