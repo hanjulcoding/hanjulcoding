@@ -1,9 +1,35 @@
 ---
 import "@/style/page.scss";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import ContentfulPostList from "@/components/blog/ContentfulPostList";
+import Post from "@/components/astro/Post.astro";
+import { pubDateSort } from "@/lib/utils";
+
+const posts: Array<object> = await Astro.glob("../posts/**/*.md");
+const tags = [
+  ...new Set(
+    posts
+      .sort(pubDateSort)
+      .map((post: any) => post.frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || [])
+      .flat()
+  ),
+];
+
+const title = "한줄코딩 - Blog";
 ---
 
-<BaseLayout title={"한줄코딩 - Blog"}>
-  <ContentfulPostList client:only="react"/>
+<BaseLayout title={title}>
+  <h1 class="mb-8">
+  {
+    tags.map((tag) => (
+    <a href={`/blog/${tag}`}>
+      <div class="tag">
+        {tag}
+      </div>
+    </a>
+    ))
+  }
+  </h1>
+  <div class="space-y-4">
+    {posts.map((post: any) => <Post url={post.url} title={post.frontmatter.title} pubDate={post.frontmatter.pubDate}/>)}
+  </div>
 </BaseLayout>

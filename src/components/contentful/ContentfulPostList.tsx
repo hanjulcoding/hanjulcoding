@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { client, type BlogPost } from "@/lib/contentful";
 
 const ContentfulPostList = () => {
+  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<BlogPost[] | null>(null);
 
   useEffect(() => {
@@ -22,6 +23,8 @@ const ContentfulPostList = () => {
       }
 
       setPosts(response);
+      setLoading(false);
+
       return response;
     }
 
@@ -31,22 +34,24 @@ const ContentfulPostList = () => {
   }, []);
 
   return (
-    <>
-      <div className="space-y-4">
-        {posts?.map((post: BlogPost) => {
-          return (
-            <>
-              <div className="flex flex-col">
+    <div className="space-y-4">
+      {loading === false && posts ? (
+        <>
+          {posts?.map((post: BlogPost) => {
+            return (
+              <div key={post?.id} className="flex flex-col">
                 <time>{dayjs(post.publishedDate).format("YYYY-MM-DD")}</time>
-                <a className="text-slate-600 dark:text-slate-200" href={`/blog/post?id=${post.id}`}>
+                <a className="text-slate-600 dark:text-slate-200" href={`/news/post?id=${post.id}`}>
                   {post.title}
                 </a>
               </div>
-            </>
-          );
-        })}
-      </div>
-    </>
+            );
+          })}
+        </>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div>
   );
 };
 
