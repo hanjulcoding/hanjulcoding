@@ -42,10 +42,12 @@ async function apiCall(query: string, variables?: Record<string, any>): Promise<
   return await fetch(fetchUrl, options);
 }
 
-async function getAllPosts(): Promise<BlogPost[]> {
+async function getAllPosts(): Promise<{ total: number; items: BlogPost[] }> {
   const query = `
     {
-      pageBlogPostCollection {
+      pageBlogPostCollection(limit:30, order: publishedDate_DESC) {
+        limit
+        total
         items {
           sys {
               id
@@ -63,13 +65,18 @@ async function getAllPosts(): Promise<BlogPost[]> {
     }`;
   const response = await apiCall(query);
   const json = await response.json();
-  return json.data.pageBlogPostCollection.items.map((post: any) => ({
-    id: post.sys.id,
-    title: post.title,
-    publishedDate: post.publishedDate,
-    featuredImage: post.featuredImage.url,
-    authorName: post.author.name,
-  }));
+  return {
+    total: json.data.pageBlogPostCollection.total,
+    items: json.data.pageBlogPostCollection.items.map((post: any) => {
+      return {
+        id: post.sys.id,
+        title: post.title,
+        publishedDate: post.publishedDate,
+        featuredImage: post.featuredImage.url,
+        authorName: post.author.name,
+      };
+    }),
+  };
 }
 
 async function getSinglePost(id: string): Promise<BlogPost> {
@@ -90,7 +97,6 @@ async function getSinglePost(id: string): Promise<BlogPost> {
           }
           name
         }
-      }
     }`;
   const variables = { id };
   const response = await apiCall(query, variables);

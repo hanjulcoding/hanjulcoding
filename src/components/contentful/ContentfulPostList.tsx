@@ -4,12 +4,20 @@ import { client, type BlogPost } from "@/lib/contentful";
 
 const ContentfulPostList = () => {
   const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState(0);
   const [posts, setPosts] = useState<BlogPost[] | null>(null);
 
   useEffect(() => {
     async function getPosts() {
       try {
-        response = (await client.getAllPosts()).map((post: BlogPost) => {
+        response = await client.getAllPosts();
+      } catch (error) {
+        return false;
+      }
+
+      setTotal(response.total);
+      setPosts(
+        response.items.map((post: BlogPost) => {
           return {
             id: post.id,
             title: post.title,
@@ -17,18 +25,18 @@ const ContentfulPostList = () => {
             featuredImage: post.featuredImage,
             authorName: post.authorName,
           };
-        });
-      } catch (error) {
-        return false;
-      }
+        })
+      );
 
-      setPosts(response);
       setLoading(false);
 
       return response;
     }
 
-    let response: BlogPost[];
+    let response: {
+      total: number;
+      items: BlogPost[];
+    };
 
     getPosts();
   }, []);
@@ -37,6 +45,7 @@ const ContentfulPostList = () => {
     <div className="space-y-4">
       {loading === false && posts ? (
         <>
+          <h1 className="mb-8">Total: {total}</h1>
           {posts?.map((post: BlogPost) => {
             return (
               <div key={post?.id} className="flex flex-col">
