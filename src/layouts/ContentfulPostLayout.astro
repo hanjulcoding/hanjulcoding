@@ -1,0 +1,21 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+---
+<BaseLayout title={''}>
+  <div class="p-8 w-full max-w-[800px] m-auto">
+    <div id="markdown" class='tech my-8'>
+      <slot />
+    </div>
+  </div>
+
+  <script is:inline
+    src="https://utteranc.es/client.js"
+    repo="hanjulcoding/hanjulcoding"
+    issue-term="title"
+    {/* pathname | url | title .. */}
+    label="comment"
+    theme="preferred-color-scheme"
+    crossorigin="anonymous"
+    async
+  />
+</BaseLayout>
