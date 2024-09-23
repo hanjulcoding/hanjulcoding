@@ -97,6 +97,7 @@ async function getSinglePost(id: string): Promise<BlogPost> {
           }
           name
         }
+      }
     }`;
   const variables = { id };
   const response = await apiCall(query, variables);
