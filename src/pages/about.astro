@@ -1,33 +1,12 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Greeting from "@/components/test/Greeting";
-
-const identity = {
-  title: "한줄코딩",
-  categories: ["Web", "AI", "Library", "Tech Blog", "Portfolio", "IT 관련 소식", "세계 정복"],
-};
+import Landing from "@/components/builder-io/Landing.tsx";
 ---
 
 <BaseLayout title={"한줄코딩 - About"}>
   <div
     class="min-h-[60vh] flex flex-col justify-center items-center text-gray-900 bg-white dark:bg-gray-950 dark:text-white m-4 sm:m-4"
   >
-    <div
-      class="text-center text-gray-800 bg-gray-100 dark:bg-gray-800 dark:text-white shadow-2xl rounded-2xl p-12 w-full max-w-2xl border-gray-800"
-    >
-      <h1 class="text-4xl font-semibold mb-6">한줄코딩에 대해서</h1>
-      <div class="text-xl text-gray-900 dark:text-white mb-4">
-        <div class="font-semibold text-gray-900 dark:text-white mb-2">
-          <a href="/news" class="hover:text-sky-500">IT News</a>
-        </div>
-        <div class="font-semibold text-gray-900 dark:text-white mb-2">
-          <a href="/blog" class="hover:text-yellow-500">Blog</a>
-        </div>
-      </div>
-      <p class="text-lg text-gray-900 dark:text-white mb-4">개발과 관련된 정보를 제공하는 곳 입니다.</p>
-      <p class="text-lg text-gray-900 dark:text-white">한줄코딩에서 제공하는</p>
-      <Greeting client:visible messages={identity.categories} />
-      <p class="text-lg text-gray-900 dark:text-white">관련 소식을 확인해보세요.</p>
-    </div>
+    <Landing client:load/>
   </div>
 </BaseLayout>
