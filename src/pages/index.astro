@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Greeting from "@/components/test/Greeting";
 import Card from "@/components/astro/Card.astro";
+
+const identity = {
+  title: "한줄코딩",
+  categories: ["Web", "AI", "Library", "Tech Blog", "Portfolio", "IT 관련 소식", "세계 정복"],
+};
 ---
 
 <BaseLayout title="">
@@ -10,7 +16,25 @@ import Card from "@/components/astro/Card.astro";
     <h1 class="font-['DungGeunMo'] text-6xl mt-4 mb-8 sm:mb-16 text-center">
       <span class="">한줄코딩</span>
     </h1>
-    <div class="">
+    <div class="space-y-4">
+      <div
+        class="text-center text-gray-800 bg-gray-100 dark:bg-gray-800 dark:text-white shadow-2xl rounded-2xl p-12 w-full max-w-2xl border-gray-800"
+      >
+        <div class="text-xl text-gray-900 dark:text-white mb-4">
+          <div class="mb-4">개발자들을 위한</div>
+          <div class="font-semibold text-gray-900 dark:text-white mb-2">
+            <a href="/trend" class="hover:text-sky-500"> IT 소식과 동향 </a>
+          </div>
+          <div class="font-semibold text-gray-900 dark:text-white mb-2">
+            <a href="/meme" class="hover:text-yellow-500"> 밈과 짤 😎 </a>
+          </div>
+        </div>
+        <p class="text-lg text-gray-900 dark:text-white">..등등</p>
+        <p class="text-lg text-gray-900 dark:text-white mb-4">개발과 관련된 정보를 제공하는 곳 입니다.</p>
+        <p class="text-lg text-gray-900 dark:text-white">한줄코딩에서 제공하는</p>
+        <Greeting client:visible messages={identity.categories} />
+        <p class="text-lg text-gray-900 dark:text-white">관련 소식을 확인해보세요.</p>
+      </div>
       <div class="instructions">
         이 프로젝트는 <code>Astro.js</code> 로 만들어졌으며, 현재 <strong>지속적으로 작업 중</strong>인 상태 입니다.<br
         />
