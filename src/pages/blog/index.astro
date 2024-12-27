@@ -4,11 +4,17 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Post from "@/components/astro/Post.astro";
 import { pubDateSort } from "@/lib/utils";
 
-const posts: Array<object> = await Astro.glob("../posts/**/*.md");
+// Step 1: import.meta.glob으로 파일 가져오기
+const allPosts = import.meta.glob("../posts/**/*.md", { eager: true });
+
+// Step 2: 객체를 배열로 변환
+const postsArray = Object.values(allPosts);
+
+// Step 3: 태그 추출 및 정렬
 const tags = [
   ...new Set(
-    posts
-      .sort(pubDateSort)
+    postsArray
+      .sort(pubDateSort as (a: unknown, b: unknown) => number)
       .map((post: any) => post.frontmatter.tags?.split(",").map((tag: string) => tag.trim()) || [])
       .flat()
   ),
@@ -19,17 +25,19 @@ const title = "한줄코딩 - Blog";
 
 <BaseLayout title={title}>
   <h1 class="mb-8">
-  {
-    tags.map((tag) => (
-    <a href={`/blog/${tag}`}>
-      <div class="tag">
-        {tag}
-      </div>
-    </a>
-    ))
-  }
+    {
+      tags.map((tag) => (
+        <a href={`/blog/${tag}`}>
+          <div class="tag">{tag}</div>
+        </a>
+      ))
+    }
   </h1>
   <div class="space-y-4">
-    {posts.map((post: any) => <Post url={post.url} title={post.frontmatter.title} pubDate={post.frontmatter.pubDate}/>)}
+    {
+      postsArray.map((post: any) => (
+        <Post url={post.url} title={post.frontmatter.title} pubDate={post.frontmatter.pubDate} />
+      ))
+    }
   </div>
 </BaseLayout>
