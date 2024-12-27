@@ -1,10 +1,10 @@
 ---
-category: trend
 layout: ../../layouts/MarkdownPostLayout.astro
-title: 'Astro.js Tutorial : My First Blog Post'
+category: trend
+title: example
 author: Astro Learner
 displayDate: 2024-06-14T00:00:00.000Z
-pubDate: 2024-06-14T00:00:00.000Z
+pubDate: 2024-12-27T08:32:20.393Z
 tags: 'example, notice, astro, test'
 ---
 
