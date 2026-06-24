@@ -4,6 +4,7 @@ import Social from './Social.astro';
 <footer>
   <Social platform="github" username="hanjulcoding" />
   <Social platform="youtube" username="@hanjulcoding" />
+  <a href="/rss.xml" class="rss-link" target="_blank" aria-label="RSS 피드">rss</a>
 </footer>
 
 <style>
@@ -13,5 +14,22 @@ import Social from './Social.astro';
     gap: 1rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
+  }
+
+  a.rss-link {
+    border: 1px solid rgb(var(--foreground));
+    padding: 0.5rem 1rem;
+    background-color: rgb(var(--foreground));
+    color: rgb(var(--background));
+    text-decoration: none;
+    border-radius: 0.25rem;
+    transition: background-color 0.1s, color 0.1s;
+    display: inline-block;
+  }
+
+  a.rss-link:hover {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 </style>
