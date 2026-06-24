@@ -1,6 +1,7 @@
 ---
 import "@/style/markdown.scss";
 import BaseLayout from "./BaseLayout.astro";
+import { format } from "date-fns";
 const { frontmatter, title, headings = [] } = Astro.props;
 const category = frontmatter?.category || "";
 const tags = frontmatter?.tags
@@ -70,7 +71,7 @@ const contentClass = `w-full max-w-[800px] mx-auto py-8${toc.length > 0 ? " lg:m
       {frontmatter?.title && <p class="text-gray-800 dark:text-gray-200 text-2xl">{frontmatter?.title}</p>}
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center mt-6">
         <p class="stext-gray-800 dark:text-gray-300">{frontmatter?.author || ''}</p>
-        <p class="mt-2 md:mt-0 text-gray-500 dark:text-gray-400">{frontmatter?.displayDate.toString().slice(0, 10) || ''}</p>
+        <p class="mt-2 md:mt-0 text-gray-500 dark:text-gray-400">{frontmatter?.displayDate ? format(new Date(frontmatter.displayDate), 'yyyy-MM-dd') : ''}</p>
       </div>
 
       <div id="markdown" class={`${category} my-8`}>
