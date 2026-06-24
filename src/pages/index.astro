@@ -1,7 +1,6 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
 import Greeting from "@/components/test/Greeting";
-import Card from "@/components/astro/Card.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const identity = {
   title: "한줄코딩",
@@ -23,35 +22,20 @@ const identity = {
         <div class="text-xl text-gray-900 dark:text-white mb-4">
           <div class="mb-4">개발자들을 위한</div>
           <div class="font-semibold text-gray-900 dark:text-white mb-2">
-            <a href="/trend" class="hover:text-sky-500"> IT 소식과 동향 </a>
+            <a href="/news" class="hover:text-sky-500"> IT 소식과 동향 </a>
           </div>
           <div class="font-semibold text-gray-900 dark:text-white mb-2">
-            <a href="/meme" class="hover:text-yellow-500"> 밈과 짤 😎 </a>
+            <a href="/news" class="hover:text-yellow-500"> 밈과 짤 😎 </a>
           </div>
         </div>
         <p class="text-lg text-gray-900 dark:text-white">..등등</p>
-        <p class="text-lg text-gray-900 dark:text-white mb-4">개발과 관련된 정보를 제공하는 곳 입니다.</p>
+        <p class="text-lg text-gray-900 dark:text-white mb-4">
+          개발과 관련된 정보를 제공하는 곳 입니다.
+        </p>
         <p class="text-lg text-gray-900 dark:text-white">한줄코딩에서 제공하는</p>
         <Greeting client:visible messages={identity.categories} />
         <p class="text-lg text-gray-900 dark:text-white">관련 소식을 확인해보세요.</p>
       </div>
-      <div class="instructions">
-        이 프로젝트는 <code>Astro.js</code> 로 만들어졌으며, 현재 <strong>지속적으로 작업 중</strong>인 상태 입니다.<br
-        />
-      </div>
-
-      <ul role="list" class="link-card-grid mb-4">
-        <Card
-          href="https://github.com/hanjulcoding/hanjulcoding"
-          title="Repository"
-          body="현재 작업 중인 이 사이트의 Repo"
-        />
-        <Card
-          href="https://6lueparr0t.github.io"
-          title="6lueparr0t's Home"
-          body="개발자 홈페이지"
-        />
-      </ul>
     </div>
   </main>
 </BaseLayout>

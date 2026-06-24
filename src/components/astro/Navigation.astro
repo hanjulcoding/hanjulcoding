@@ -3,25 +3,13 @@ const links = [
   { href: "/", text: "home" },
   { href: "/about", text: "about" },
   { href: "/news", text: "news" },
-  { href: "/blog", text: "blog" },
 ];
-const isDevelopment = import.meta.env.NODE_ENV === "development";
 ---
 
 <div class="nav-links">
   {links.map((link) => (
     <a href={link.href} aria-label={link.text}>{link.text}</a>
   ))}
-  {isDevelopment && (
-    <a
-      href="/admin/index.html"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="underline"
-    >
-      Admin
-    </a>
-  )}
 </div>
 
 <style>

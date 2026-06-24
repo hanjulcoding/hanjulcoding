@@ -18,6 +18,5 @@ All commands are run from the root of the project, from a terminal:
 - https://docs.astro.build/ko/getting-started
 - https://ko.vitejs.dev
 - https://tailwindcss.com
-- https://tina.io
 - https://www.contentful.com/
 
