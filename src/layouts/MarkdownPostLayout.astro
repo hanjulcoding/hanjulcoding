@@ -1,11 +1,16 @@
 ---
 import "@/style/markdown.scss";
 import BaseLayout from "./BaseLayout.astro";
-const { frontmatter, title } = Astro.props;
+const { frontmatter, title, headings = [] } = Astro.props;
 const category = frontmatter?.category || "";
 const tags = frontmatter?.tags
   ? frontmatter.tags.split(",").map((tag: string) => tag.trim())
   : [];
+const toc = (headings as { depth: number; slug: string; text: string }[]).filter(
+  (h) => h.depth === 2 || h.depth === 3
+);
+// TOC가 있을 때만 좌측 정렬(사이드바 옆), 없으면 중앙 정렬
+const contentClass = `w-full max-w-[800px] mx-auto py-8${toc.length > 0 ? " lg:mx-0" : ""}`;
 ---
 
 <script is:inline>
@@ -39,39 +44,100 @@ const tags = frontmatter?.tags
 </script>
 
 <BaseLayout title={frontmatter?.title || title}>
-  <div class="p-8 w-full max-w-[800px] m-auto">
-    {frontmatter?.title && <p class="text-gray-800 dark:text-gray-200 text-2xl">{frontmatter?.title}</p>}
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mt-6">
-      <p class="stext-gray-800 dark:text-gray-300">{frontmatter?.author || ''}</p>
-      <p class="mt-2 md:mt-0 text-gray-500 dark:text-gray-400">{frontmatter?.displayDate.toString().slice(0, 10) || ''}</p>
-    </div>
+  <div class="mx-auto w-full max-w-[1100px] px-4 sm:px-8 lg:flex lg:gap-10 lg:items-start">
+    {toc.length > 0 && (
+      <aside class="hidden lg:block lg:w-56 lg:shrink-0 lg:sticky lg:top-24 py-8">
+        <nav class="text-sm" aria-label="목차">
+          <p class="font-semibold mb-3 text-gray-500 dark:text-gray-400">목차</p>
+          <ul class="space-y-2">
+            {toc.map((h) => (
+              <li class={h.depth === 3 ? "pl-3" : ""}>
+                <a
+                  href={`#${h.slug}`}
+                  data-toc-link={h.slug}
+                  class="toc-link text-gray-600 dark:text-gray-300 hover:text-[rgb(var(--foreground))] transition-colors"
+                >
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    )}
 
-    <div id="markdown" class={`${category} my-8`}>
-      <slot />
-    </div>
+    <div class={contentClass}>
+      {frontmatter?.title && <p class="text-gray-800 dark:text-gray-200 text-2xl">{frontmatter?.title}</p>}
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mt-6">
+        <p class="stext-gray-800 dark:text-gray-300">{frontmatter?.author || ''}</p>
+        <p class="mt-2 md:mt-0 text-gray-500 dark:text-gray-400">{frontmatter?.displayDate.toString().slice(0, 10) || ''}</p>
+      </div>
 
-    <div class="tags">
-      {
-        tags.map((tag: string) => {
-          tag = tag.trim();
-          return (
-            <p class="tag">
-              <a href={`/blog/${tag}`}>{tag}</a>
-            </p>
-          );
-        })
-      }
+      <div id="markdown" class={`${category} my-8`}>
+        <slot />
+      </div>
+
+      <div class="tags">
+        {
+          tags.map((tag: string) => {
+            tag = tag.trim();
+            return (
+              <p class="tag">
+                <a href={`/news/${tag}`}>{tag}</a>
+              </p>
+            );
+          })
+        }
+      </div>
+
+      <script is:inline {...({
+        src: "https://utteranc.es/client.js",
+        repo: "hanjulcoding/hanjulcoding",
+        "issue-term": "title",
+        label: "comment",
+        theme: "preferred-color-scheme",
+        crossorigin: "anonymous",
+        async: true,
+      } as any)}></script>
     </div>
   </div>
-
-  <script is:inline
-    src="https://utteranc.es/client.js"
-    repo="hanjulcoding/hanjulcoding"
-    issue-term="title"
-    {/* pathname | url | title .. */}
-    label="comment"
-    theme="preferred-color-scheme"
-    crossorigin="anonymous"
-    async
-  />
 </BaseLayout>
+
+<style is:global>
+  #markdown :is(h1, h2, h3, h4) {
+    scroll-margin-top: 6rem;
+  }
+  .toc-link.active {
+    color: rgb(var(--foreground));
+    font-weight: 600;
+  }
+</style>
+
+<script is:inline>
+  // 스크롤 위치에 따라 현재 섹션 TOC 링크 하이라이트
+  (function () {
+    const links = document.querySelectorAll('.toc-link');
+    if (!links.length) return;
+
+    const linkBySlug = new Map();
+    links.forEach((l) => linkBySlug.set(l.getAttribute('data-toc-link'), l));
+
+    const headings = document.querySelectorAll('#markdown h2, #markdown h3');
+    if (!headings.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            links.forEach((l) => l.classList.remove('active'));
+            const active = linkBySlug.get(entry.target.id);
+            if (active) active.classList.add('active');
+          }
+        });
+      },
+      { rootMargin: '-80px 0px -70% 0px' }
+    );
+
+    headings.forEach((h) => observer.observe(h));
+  })();
+</script>

@@ -1,56 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.js";
 
 @font-face {
   font-family: 'DungGeunMo';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
-}
-
-@mixin mobile() {
-  @media only screen and (hover: none) and (pointer: coarse) {
-    @content;
-  }
-}
-
-@mixin media-query($device) {
-  @media screen and (max-width: $device) {
-    @content;
-  }
-}
-
-@mixin keyframes($animation-name) {
-  @-webkit-keyframes #{$animation-name} {
-    @content;
-  }
-
-  @-moz-keyframes #{$animation-name} {
-    @content;
-  }
-
-  @-ms-keyframes #{$animation-name} {
-    @content;
-  }
-
-  @-o-keyframes #{$animation-name} {
-    @content;
-  }
-
-  @keyframes #{$animation-name} {
-    @content;
-  }
-}
-
-@mixin animation($str) {
-  -webkit-animation: #{$str};
-  -moz-animation: #{$str};
-  -ms-animation: #{$str};
-  -o-animation: #{$str};
-  animation: #{$str};
 }
 
 @layer base {
@@ -116,10 +72,6 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
       background-size: 100%;
-
-      // @include mobile() {
-      //   background-size: 100%;
-      // }
     }
 
     .home .typed-cursor--blink {
@@ -129,7 +81,7 @@
       display: inline-block;
       transform: translateY(3px);
 
-      @include mobile() {
+      @media only screen and (hover: none) and (pointer: coarse) {
         height: 50px;
       }
     }
