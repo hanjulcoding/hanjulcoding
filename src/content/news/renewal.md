@@ -1,10 +1,10 @@
 ---
-category: trend
 title: 한줄코딩 사이트 리뉴얼 작업기
+category: update
 author: 6lueparr0t
-displayDate: 2026-06-24T00:00:00.000Z
-pubDate: 2026-06-24T00:00:00.000Z
-tags: 'astro, 리뉴얼'
+displayDate: 2026-06-24
+pubDate: 2026-06-24
+tags: astro, 리뉴얼
 ---
 
 ## 리뉴얼 배경

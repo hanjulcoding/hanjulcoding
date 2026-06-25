@@ -7,9 +7,9 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   // content collection에서 글 가져오기 (astro-editor 연동)
-  const postsArray = (await getCollection("posts")).map((post) => ({
+  const postsArray = (await getCollection("news")).map((post) => ({
     ...post,
-    url: `/posts/${post.id}`,
+    url: `/news/${post.id}`,
     frontmatter: post.data,
   }));
 

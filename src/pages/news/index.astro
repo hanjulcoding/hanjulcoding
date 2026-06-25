@@ -6,10 +6,10 @@ import { pubDateSort } from "@/lib/utils";
 import { getCollection } from "astro:content";
 
 // content collection에서 글 가져오기 (astro-editor 연동), 최신순 정렬
-const postsArray = (await getCollection("posts"))
+const postsArray = (await getCollection("news"))
   .map((post) => ({
     ...post,
-    url: `/posts/${post.id}`,
+    url: `/news/${post.id}`,
     frontmatter: post.data,
   }))
   .sort(pubDateSort as (a: unknown, b: unknown) => number);
