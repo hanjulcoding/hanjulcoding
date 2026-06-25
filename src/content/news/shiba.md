@@ -7,4 +7,4 @@ pubDate: 2024-12-27T08:31:37.299Z
 tags: '시바'
 ---
 
-![](/media/shiba.webp)
+![](../../assets/news/shiba.webp)
