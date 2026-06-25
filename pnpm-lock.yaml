@@ -84,6 +84,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^7.13.0
         version: 7.13.0(eslint@8.57.0)(typescript@5.4.5)
+      husky:
+        specifier: ^9.1.7
+        version: 9.1.7
       sass:
         specifier: ^1.77.5
         version: 1.77.5
@@ -1894,6 +1897,11 @@ packages:
 
   http-cache-semantics@4.2.0:
     resolution: {integrity: sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==}
+
+  husky@9.1.7:
+    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   ignore@5.3.1:
     resolution: {integrity: sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==}
@@ -5195,6 +5203,8 @@ snapshots:
   html-void-elements@3.0.0: {}
 
   http-cache-semantics@4.2.0: {}
+
+  husky@9.1.7: {}
 
   ignore@5.3.1: {}
 

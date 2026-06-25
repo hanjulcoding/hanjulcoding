@@ -3,11 +3,13 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
+    "postinstall": "astro sync",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -37,6 +39,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^7.13.0",
     "@typescript-eslint/parser": "^7.13.0",
+    "husky": "^9.1.7",
     "sass": "^1.77.5"
   },
   "packageManager": "pnpm@9.7.0+sha512.dc09430156b427f5ecfc79888899e1c39d2d690f004be70e05230b72cb173d96839587545d09429b55ac3c429c801b4dc3c0e002f653830a420fa2dd4e3cf9cf"

@@ -1,0 +1,25 @@
+# docs: 커밋이면 release를 main으로 fast-forward 하고 origin에 push (사이트 자동 업데이트)
+# 무한 루프 방지: hook 내부 git 동작이 다시 hook을 트리거하지 않도록 가드
+[ -n "$HANJUL_RELEASE_SYNC" ] && exit 0
+
+branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+[ "$branch" = "main" ] || exit 0
+
+msg="$(git log -1 --pretty=%s)"
+case "$msg" in
+  docs:*) ;;
+  *) exit 0 ;;
+esac
+
+export HANJUL_RELEASE_SYNC=1
+
+# release를 main으로 fast-forward (체크아웃 없이 로컬 ref 갱신)
+if git fetch . main:release; then
+  if git push origin main release; then
+    echo "[post-commit] release를 main으로 동기화하고 origin에 push했어 → 사이트 업데이트 진행됨"
+  else
+    echo "[post-commit] push 실패. 직접 'git push origin main release' 실행해줘" >&2
+  fi
+else
+  echo "[post-commit] release가 main과 분기되어 fast-forward 불가. 수동 머지가 필요해" >&2
+fi
