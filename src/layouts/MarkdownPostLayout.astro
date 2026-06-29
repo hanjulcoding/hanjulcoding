@@ -40,6 +40,26 @@ const contentClass = `w-full max-w-[800px] mx-auto py-8${toc.length > 0 ? " lg:m
             anchor.setAttribute('rel', 'noopener noreferrer');
         }
       });
+
+      // 코드 블록마다 복사 버튼 추가
+      markdownContainer.querySelectorAll('pre').forEach(pre => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block';
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'copy-btn';
+        btn.textContent = 'Copy';
+        btn.addEventListener('click', async () => {
+          const code = pre.querySelector('code');
+          await navigator.clipboard.writeText(code ? code.innerText : pre.innerText);
+          btn.textContent = 'Copied!';
+          setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+        });
+        wrapper.appendChild(btn);
+      });
     }
   });
 </script>
@@ -84,7 +104,7 @@ const contentClass = `w-full max-w-[800px] mx-auto py-8${toc.length > 0 ? " lg:m
             tag = tag.trim();
             return (
               <p class="tag">
-                <a href={`/news/tags/${tag}`}>{tag}</a>
+                <a href={`/${category}/tags/${tag}`}>{tag}</a>
               </p>
             );
           })

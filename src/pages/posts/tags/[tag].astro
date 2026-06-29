@@ -1,0 +1,32 @@
+---
+import "@/style/page.scss";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Post from "@/components/astro/Post.astro";
+import { loadPosts, extractTags } from "@/lib/collection";
+
+export async function getStaticPaths() {
+  const posts = await loadPosts("posts");
+  return extractTags(posts).map((tag) => ({
+    params: { tag },
+    props: {
+      posts: posts.filter((post: any) =>
+        (post.frontmatter.tags?.split(",").map((t: string) => t.trim()) || []).includes(tag)
+      ),
+    },
+  }));
+}
+
+const { tag }: { tag: string } = Astro.params;
+const { posts }: { posts: any } = Astro.props;
+---
+
+<BaseLayout title={`한줄코딩 - Posts:${tag}`}>
+  <h1 class="mb-8">
+    <a href={`/posts`}><span class="tag">{tag}</span></a> 태그 관련 글
+  </h1>
+  <div>
+    {posts.map((post: any) => (
+      <Post url={post.url} title={post.frontmatter.title} pubDate={post.frontmatter.pubDate} />
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+import "@/style/page.scss";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostList from "@/components/astro/PostList.astro";
+import { loadPosts } from "@/lib/collection";
+
+const posts = await loadPosts("posts");
+---
+
+<BaseLayout title="한줄코딩 - Posts">
+  <PostList posts={posts} />
+</BaseLayout>

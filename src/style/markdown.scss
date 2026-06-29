@@ -44,25 +44,10 @@
     line-height: 1.6;
   }
 
-  &.blog {
-    a {
-      text-decoration: underline;
-      text-decoration-color: #ef4444;
-    }
-  }
-
-  &.tech {
-    a {
-      text-decoration: underline;
-      text-decoration-color: #0366d6;
-    }
-  }
-
-  &.meme {
-    a {
-      text-decoration: underline;
-      text-decoration-color: #eab308;
-    }
+  a {
+    color: #0366d6;
+    text-decoration: underline;
+    text-decoration-color: #0366d6;
   }
 
 
@@ -109,6 +94,30 @@
       font-size: 100%;
       background: none;
       border: 0;
+    }
+  }
+
+  .code-block {
+    position: relative;
+
+    .copy-btn {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      padding: 0.2em 0.6em;
+      font-size: 0.75rem;
+      color: #57606a;
+      background-color: #fff;
+      border: 1px solid #d0d7de;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    &:hover .copy-btn,
+    .copy-btn:focus {
+      opacity: 1;
     }
   }
 
