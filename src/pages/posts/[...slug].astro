@@ -3,17 +3,23 @@ import { getCollection, render } from "astro:content";
 import MarkdownPostLayout from "@/layouts/MarkdownPostLayout.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
-  return posts.map((post) => ({
+  const posts = (await getCollection("posts")).sort(
+    (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+  );
+  return posts.map((post, i) => ({
     params: { slug: post.id },
-    props: { post },
+    props: {
+      post,
+      prev: i > 0 ? { url: `/posts/${posts[i - 1].id}`, title: posts[i - 1].data.title } : null,
+      next: i < posts.length - 1 ? { url: `/posts/${posts[i + 1].id}`, title: posts[i + 1].data.title } : null,
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, prev, next } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<MarkdownPostLayout frontmatter={post.data} headings={headings}>
+<MarkdownPostLayout frontmatter={post.data} headings={headings} backHref="/posts" prev={prev} next={next}>
   <Content />
 </MarkdownPostLayout>

@@ -2,7 +2,7 @@
 import "@/style/markdown.scss";
 import BaseLayout from "./BaseLayout.astro";
 import { format } from "date-fns";
-const { frontmatter, title, headings = [] } = Astro.props;
+const { frontmatter, title, headings = [], backHref, prev = null, next = null } = Astro.props;
 const category = frontmatter?.category || "";
 const tags = frontmatter?.tags
   ? frontmatter.tags.split(",").map((tag: string) => tag.trim())
@@ -88,7 +88,15 @@ const contentClass = `w-full max-w-[800px] mx-auto py-8${toc.length > 0 ? " lg:m
     )}
 
     <div class={contentClass}>
-      {frontmatter?.title && <p class="text-gray-800 dark:text-gray-200 text-2xl">{frontmatter?.title}</p>}
+      {backHref && (
+        <a
+          href={backHref}
+          class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-[rgb(var(--foreground))] transition-colors"
+        >
+          &larr; 목록으로
+        </a>
+      )}
+      {frontmatter?.title && <p class="mt-4 text-gray-800 dark:text-gray-200 text-2xl">{frontmatter?.title}</p>}
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center mt-6">
         <p class="stext-gray-800 dark:text-gray-300">{frontmatter?.author || ''}</p>
         <p class="mt-2 md:mt-0 text-gray-500 dark:text-gray-400">{frontmatter?.displayDate ? format(new Date(frontmatter.displayDate), 'yyyy-MM-dd') : ''}</p>
@@ -110,6 +118,33 @@ const contentClass = `w-full max-w-[800px] mx-auto py-8${toc.length > 0 ? " lg:m
           })
         }
       </div>
+
+      {(prev || next) && (
+        <nav class="flex gap-4 my-8 border-t border-border pt-6" aria-label="이전글 다음글">
+          <div class="flex-1">
+            {prev && (
+              <a
+                href={prev.url}
+                class="flex flex-col gap-1 text-gray-600 dark:text-gray-300 hover:text-[rgb(var(--foreground))] transition-colors"
+              >
+                <span class="text-sm text-gray-500 dark:text-gray-400">&larr; 이전글</span>
+                <span class="truncate">{prev.title}</span>
+              </a>
+            )}
+          </div>
+          <div class="flex-1 text-right">
+            {next && (
+              <a
+                href={next.url}
+                class="flex flex-col gap-1 text-gray-600 dark:text-gray-300 hover:text-[rgb(var(--foreground))] transition-colors"
+              >
+                <span class="text-sm text-gray-500 dark:text-gray-400">다음글 &rarr;</span>
+                <span class="truncate">{next.title}</span>
+              </a>
+            )}
+          </div>
+        </nav>
+      )}
 
       <script is:inline {...({
         src: "https://utteranc.es/client.js",
