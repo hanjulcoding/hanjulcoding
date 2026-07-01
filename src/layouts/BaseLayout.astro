@@ -6,9 +6,10 @@ import "@/style/globals.css";
 interface Props {
   title: string;
   isError?: boolean;
+  bare?: boolean;
 }
 
-const { title, isError } = Astro.props;
+const { title, isError, bare } = Astro.props;
 ---
 
 <!doctype html>
@@ -34,7 +35,7 @@ const { title, isError } = Astro.props;
     <Theme />
     {!isError && <Header />}
     <main>
-      <div class="page">
+      <div class:list={["page", { bare }]}>
         <slot />
       </div>
     </main>

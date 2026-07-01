@@ -5,10 +5,16 @@ main {
 
 main div.page {
   flex: 1;
-  max-width: 800px;
+  max-width: 1024px;
   margin: 2rem 1rem 0 1rem;
   padding: 2rem;
   border: 2px solid #e1e4e8;
   border-radius: 1rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* tool 개별 페이지 등 인터랙티브 화면: 박스 테두리 없이 */
+main div.page.bare {
+  border: none;
+  border-radius: 0;
 }

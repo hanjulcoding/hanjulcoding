@@ -1,0 +1,27 @@
+---
+import "@/style/page.scss";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostList from "@/components/astro/PostList.astro";
+
+// tool 하나 = 페이지 하나. 여기에 항목만 추가하면 목록/검색/태그에 노출됨.
+const tools = [
+  {
+    url: "/tools/md-to-plain-text",
+    frontmatter: {
+      title: "MD to Text",
+      tags: "markdown, text, ai",
+    },
+  },
+  {
+    url: "/tools/prompt-template",
+    frontmatter: {
+      title: "Prompt Template",
+      tags: "prompt, template, ai",
+    },
+  },
+];
+---
+
+<BaseLayout title="한줄코딩 - Tools">
+  <PostList posts={tools} />
+</BaseLayout>

@@ -1,0 +1,16 @@
+---
+import "@/style/page.scss";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MdToPlainText from "@/components/tools/MdToPlainText.tsx";
+---
+
+<BaseLayout title="한줄코딩 - MD to Text" bare>
+  <a
+    href="/tools"
+    class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-[rgb(var(--foreground))] transition-colors"
+  >
+    &larr; 목록으로
+  </a>
+  <h1 class="mt-4 mb-6 text-2xl font-bold md:text-3xl">MD to Text</h1>
+  <MdToPlainText client:load />
+</BaseLayout>
