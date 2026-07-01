@@ -39,6 +39,7 @@ const PromptTemplate: React.FC = () => {
   const [editingVar, setEditingVar] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
   const [isCopied, setIsCopied] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [toast, setToast] = useState("");
   const [importing, setImporting] = useState(false);
@@ -69,10 +70,7 @@ const PromptTemplate: React.FC = () => {
   // 치환된 최종 본문 (복사 대상)
   const resolved = useMemo(() => {
     if (!draft) return "";
-    return draft.body.replace(
-      new RegExp(VAR_RE),
-      (_m, name: string) => replacements[name] || `{{${name}}}`
-    );
+    return draft.body.replace(new RegExp(VAR_RE), (_m, name: string) => replacements[name] || name);
   }, [draft, replacements]);
 
   const openTemplate = (t: Template) => {
@@ -143,6 +141,8 @@ const PromptTemplate: React.FC = () => {
     );
     setSelectedId(id);
     setDraft({ ...draft, id });
+    setIsSaved(true);
+    setTimeout(() => setIsSaved(false), 2000);
   };
 
   const remove = () => {
@@ -162,7 +162,7 @@ const PromptTemplate: React.FC = () => {
     if (templates.length === 0) return flashToast("내보낼 템플릿이 없어.");
     navigator.clipboard
       .writeText(JSON.stringify(templates, null, 2))
-      .then(() => flashToast("JSON 복사 완료! 댓글에 붙여넣어."))
+      .then(() => flashToast("JSON 복사 완료!"))
       .catch(() => flashToast("복사 실패."));
   };
 
@@ -209,27 +209,29 @@ const PromptTemplate: React.FC = () => {
     <>
       <div className="flex min-h-[70vh] flex-col">
         {/* 헤더 */}
-        <div className="flex items-start justify-between gap-4">
-          <div>
+        <div>
+          <div className="flex items-center justify-between gap-4">
             <h1 className="text-2xl font-semibold">템플릿</h1>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              자주 쓰는 프롬프트를 저장. 본문 안의{" "}
-              <code className="rounded bg-[rgb(var(--foreground))]/10 px-1 text-xs">
-                {"{{변수}}"}
-              </code>{" "}
-              는 아래 치환 폼에서 값을 채울 슬롯.
-            </p>
+            <div className="flex items-center gap-1">
+              {toast && <span className="mr-1 text-xs text-green-500">{toast}</span>}
+              <Button size="sm" variant="outline" onClick={exportTemplates}>
+                내보내기
+              </Button>
+              <Button size="sm" variant="outline" onClick={() => setImporting((v) => !v)}>
+                가져오기
+              </Button>
+              <Button size="sm" onClick={startNew}>
+                + 새 템플릿
+              </Button>
+            </div>
           </div>
-          <div className="flex items-center gap-1">
-            {toast && <span className="mr-1 text-xs text-green-500">{toast}</span>}
-            <Button size="sm" variant="outline" onClick={exportTemplates}>
-              내보내기
-            </Button>
-            <Button size="sm" variant="outline" onClick={() => setImporting((v) => !v)}>
-              가져오기
-            </Button>
-            <Button onClick={startNew}>+ 새 템플릿</Button>
-          </div>
+          <p className="mt-1 text-sm break-keep text-gray-500 dark:text-gray-400">
+            자주 쓰는 프롬프트를 저장. 본문 안의{" "}
+            <code className="whitespace-nowrap rounded bg-[rgb(var(--foreground))]/10 px-1 text-xs">
+              {"{{변수}}"}
+            </code>
+            는 아래 치환 폼에서 값을 채울 슬롯.
+          </p>
         </div>
 
         <div className="mt-6 grid flex-1 gap-6 lg:grid-cols-[260px_1fr]">
@@ -277,7 +279,8 @@ const PromptTemplate: React.FC = () => {
                     placeholder="템플릿 이름"
                   />
                   <div className="flex items-center gap-1">
-                    {isCopied && <span className="mr-1 text-xs text-green-500">복사 완료!</span>}
+                    {isSaved && <span className="mr-1 text-xs text-green-500">저장 완료</span>}
+                    {isCopied && <span className="mr-1 text-xs text-green-500">복사 완료</span>}
                     <Button size="sm" disabled={!draft.name.trim()} onClick={save}>
                       저장
                     </Button>
@@ -311,7 +314,7 @@ const PromptTemplate: React.FC = () => {
                   </div>
                   <textarea
                     ref={bodyRef}
-                    className={`${inputBox} min-h-[220px] flex-1 resize-none font-mono text-sm`}
+                    className={`${inputBox} flex-1 resize-none font-mono text-sm`}
                     value={draft.body}
                     onChange={(e) => setDraft({ ...draft, body: e.target.value })}
                     placeholder={"예: {{var1}} 에 대해서 설명해줘"}
