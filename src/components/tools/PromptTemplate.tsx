@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import { Button } from "@/components/ui/button";
 import Giscus from "@/components/Giscus";
+import { Button } from "@/components/ui/button";
 
 interface Template {
   id: string;
@@ -40,6 +40,9 @@ const PromptTemplate: React.FC = () => {
   const [editingName, setEditingName] = useState("");
   const [isCopied, setIsCopied] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [toast, setToast] = useState("");
+  const [importing, setImporting] = useState(false);
+  const [importText, setImportText] = useState("");
   const bodyRef = useRef<HTMLTextAreaElement>(null);
 
   // localStorage 복원
@@ -149,6 +152,51 @@ const PromptTemplate: React.FC = () => {
     cancel();
   };
 
+  const flashToast = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(""), 2500);
+  };
+
+  // 전체 템플릿을 JSON 문자열로 클립보드에 복사 (giscus 댓글에 붙여넣기)
+  const exportTemplates = () => {
+    if (templates.length === 0) return flashToast("내보낼 템플릿이 없어.");
+    navigator.clipboard
+      .writeText(JSON.stringify(templates, null, 2))
+      .then(() => flashToast("JSON 복사 완료! 댓글에 붙여넣어."))
+      .catch(() => flashToast("복사 실패."));
+  };
+
+  // 붙여넣은 JSON을 파싱해 id 기준으로 병합 (같은 id는 덮어쓰기, 새 id는 추가)
+  const importTemplates = () => {
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(importText);
+    } catch {
+      return flashToast("JSON 형식이 올바르지 않아.");
+    }
+    if (!Array.isArray(parsed)) return flashToast("JSON 배열이 아니야.");
+    const incoming: Template[] = [];
+    for (const item of parsed) {
+      if (!item || typeof item.name !== "string" || typeof item.body !== "string") continue;
+      incoming.push({
+        id: typeof item.id === "string" ? item.id : crypto.randomUUID(),
+        name: item.name,
+        body: item.body,
+        replacements:
+          item.replacements && typeof item.replacements === "object" ? item.replacements : {},
+      });
+    }
+    if (incoming.length === 0) return flashToast("가져올 템플릿이 없어.");
+    setTemplates((prev) => {
+      const byId = new Map(prev.map((t) => [t.id, t]));
+      incoming.forEach((t) => byId.set(t.id, t));
+      return [...byId.values()];
+    });
+    setImporting(false);
+    setImportText("");
+    flashToast(`${incoming.length}개 가져왔어.`);
+  };
+
   const handleCopy = () => {
     if (!resolved) return;
     navigator.clipboard.writeText(resolved).then(() => {
@@ -172,7 +220,16 @@ const PromptTemplate: React.FC = () => {
               는 아래 치환 폼에서 값을 채울 슬롯.
             </p>
           </div>
-          <Button onClick={startNew}>+ 새 템플릿</Button>
+          <div className="flex items-center gap-1">
+            {toast && <span className="mr-1 text-xs text-green-500">{toast}</span>}
+            <Button size="sm" variant="outline" onClick={exportTemplates}>
+              내보내기
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => setImporting((v) => !v)}>
+              가져오기
+            </Button>
+            <Button onClick={startNew}>+ 새 템플릿</Button>
+          </div>
         </div>
 
         <div className="mt-6 grid flex-1 gap-6 lg:grid-cols-[260px_1fr]">
@@ -337,6 +394,49 @@ const PromptTemplate: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* 가져오기 모달 */}
+      {importing && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          onClick={() => {
+            setImporting(false);
+            setImportText("");
+          }}
+        >
+          <div
+            className="w-full max-w-3xl rounded-lg border border-[rgb(var(--foreground))]/30 bg-[rgb(var(--background))] p-6 shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-lg font-semibold">템플릿 가져오기</h2>
+            <p className="mt-1 mb-3 text-xs text-gray-500 dark:text-gray-400">
+              내보낸 JSON을 붙여넣어. 같은 id는 덮어쓰고, 새 항목은 추가돼.
+            </p>
+            <textarea
+              autoFocus
+              className={`${inputBox} min-h-[600px] resize-none font-mono text-sm`}
+              value={importText}
+              onChange={(e) => setImportText(e.target.value)}
+              placeholder='[{"id":"...","name":"...","body":"..."}]'
+            />
+            <div className="mt-3 flex justify-end gap-1">
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => {
+                  setImporting(false);
+                  setImportText("");
+                }}
+              >
+                취소
+              </Button>
+              <Button size="sm" disabled={!importText.trim()} onClick={importTemplates}>
+                저장
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
       <Giscus />
     </>
   );
