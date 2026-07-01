@@ -1,8 +1,9 @@
 ---
-import Social from './Social.astro';
+import Social from "./Social.astro";
 ---
+
 <footer>
-  <Social platform="github" username="hanjulcoding" />
+  <Social platform="github" username="hanjulcoding/hanjulcoding" />
   <Social platform="youtube" username="@hanjulcoding" />
   <a href="/rss.xml" class="rss-link" target="_blank" aria-label="RSS 피드">rss</a>
 </footer>
@@ -23,7 +24,9 @@ import Social from './Social.astro';
     color: rgb(var(--background));
     text-decoration: none;
     border-radius: 0.25rem;
-    transition: background-color 0.1s, color 0.1s;
+    transition:
+      background-color 0.1s,
+      color 0.1s;
     display: inline-block;
   }
 

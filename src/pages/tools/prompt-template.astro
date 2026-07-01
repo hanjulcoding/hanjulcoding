@@ -11,6 +11,10 @@ import PromptTemplate from "@/components/tools/PromptTemplate.tsx";
   >
     &larr; 목록으로
   </a>
+  <h1 class="mt-4 mb-2 text-2xl font-bold md:text-3xl">프롬프트 템플릿</h1>
+  <p class="mb-6 text-gray-500 dark:text-gray-400">
+    변수를 채워 넣어 재사용 가능한 AI 프롬프트를 빠르게 만들어주는 도구예요. 자주 쓰는 문장에 <code>{`{{변수}}`}</code>를 넣어두면, 값만 바꿔가며 완성된 프롬프트를 바로 복사할 수 있어요.
+  </p>
   <div class="mt-4">
     <PromptTemplate client:load />
   </div>

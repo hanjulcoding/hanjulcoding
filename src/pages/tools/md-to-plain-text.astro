@@ -11,6 +11,9 @@ import MdToPlainText from "@/components/tools/MdToPlainText.tsx";
   >
     &larr; 목록으로
   </a>
-  <h1 class="mt-4 mb-6 text-2xl font-bold md:text-3xl">MD to Text</h1>
+  <h1 class="mt-4 mb-2 text-2xl font-bold md:text-3xl">마크다운 제거기</h1>
+  <p class="mb-6 text-gray-500 dark:text-gray-400">
+    마크다운 문법을 걷어내고 깔끔한 일반 텍스트로 바꿔주는 도구예요. 제목·강조·링크·코드 같은 마크다운 기호를 없앤 순수 텍스트가 필요할 때 붙여넣기만 하면 돼요.
+  </p>
   <MdToPlainText client:load />
 </BaseLayout>

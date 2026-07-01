@@ -34,7 +34,12 @@ const PAGE_SIZE = 10;
         data-title={(post.frontmatter.title || "").toLowerCase()}
         data-tags={(post.frontmatter.tags || "").toLowerCase()}
       >
-        <Post url={post.url} title={post.frontmatter.title} pubDate={post.frontmatter.pubDate} />
+        <Post
+          url={post.url}
+          title={post.frontmatter.title}
+          pubDate={post.frontmatter.pubDate}
+          description={post.frontmatter.description}
+        />
       </li>
     ))
   }
@@ -42,8 +47,7 @@ const PAGE_SIZE = 10;
 
 <p id="empty" class="hidden text-gray-500 dark:text-gray-400 mt-6">검색 결과가 없습니다.</p>
 
-<nav id="pagination" class="flex flex-wrap gap-2 justify-center mt-8" aria-label="pagination">
-</nav>
+<nav id="pagination" class="flex flex-wrap gap-2 justify-center mt-8" aria-label="pagination"></nav>
 
 <script is:inline define:vars={{ pageSize: PAGE_SIZE }}>
   const list = document.getElementById("post-list");
@@ -66,9 +70,7 @@ const PAGE_SIZE = 10;
 
   function matches(el) {
     const okText =
-      !query ||
-      (el.dataset.title || "").includes(query) ||
-      (el.dataset.tags || "").includes(query);
+      !query || (el.dataset.title || "").includes(query) || (el.dataset.tags || "").includes(query);
     if (!okText) return false;
     if (selectedTags.size === 0) return true;
     // 선택한 태그 중 하나라도 포함하면 노출 (OR)

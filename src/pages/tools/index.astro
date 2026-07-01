@@ -1,22 +1,24 @@
 ---
-import "@/style/page.scss";
-import BaseLayout from "@/layouts/BaseLayout.astro";
 import PostList from "@/components/astro/PostList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import "@/style/page.scss";
 
 // tool 하나 = 페이지 하나. 여기에 항목만 추가하면 목록/검색/태그에 노출됨.
 const tools = [
   {
-    url: "/tools/md-to-plain-text",
+    url: "/tools/prompt-template",
     frontmatter: {
-      title: "MD to Text",
-      tags: "markdown, text, ai",
+      title: "프롬프트 템플릿",
+      description: "AI 프롬프트 생성 및 관리 도구",
+      tags: "prompt, template, ai",
     },
   },
   {
-    url: "/tools/prompt-template",
+    url: "/tools/md-to-plain-text",
     frontmatter: {
-      title: "Prompt Template",
-      tags: "prompt, template, ai",
+      title: "마크다운 제거기",
+      description: "마크다운 문법을 일반 텍스트로 바꿔줌",
+      tags: "markdown, text, ai",
     },
   },
 ];
