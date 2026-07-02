@@ -1,0 +1,19 @@
+---
+import "@/style/page.scss";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MemoShare from "@/components/tools/MemoShare.tsx";
+---
+
+<BaseLayout title="한줄코딩 - 메모 공유" bare>
+  <a
+    href="/tools"
+    class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-[rgb(var(--foreground))] transition-colors"
+  >
+    &larr; 목록으로
+  </a>
+  <h1 class="mt-4 mb-2 text-2xl font-bold md:text-3xl">메모 공유</h1>
+  <p class="mb-6 text-gray-500 dark:text-gray-400">
+    서버 저장 없이 메모 내용을 URL에 담아 공유하는 도구. 텍스트를 압축해 URL에 넣고, 링크를 열면 그대로 복원돼요. 내용은 URL 안에만 존재하고 링크를 아는 사람만 볼 수 있어요.
+  </p>
+  <MemoShare client:load />
+</BaseLayout>
