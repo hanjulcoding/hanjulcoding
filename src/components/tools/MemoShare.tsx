@@ -1,11 +1,24 @@
-import { Share1Icon } from "@radix-ui/react-icons";
+import { CopyIcon } from "@radix-ui/react-icons";
 import React, { useEffect, useRef, useState } from "react";
 
 import Giscus from "@/components/Giscus";
 import { Button } from "@/components/ui/button";
 
 const STORAGE_KEY = "memoShareDraft";
+const STRIP_MD_KEY = "memoShareStripMd";
 const MAX_URL_LEN = 2000; // 브라우저/서버 안전 한도
+
+// 마크다운 문법 제거 (헤더/인용/리스트/링크/이미지/굵게·기울임)
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/^#+\s+/gm, "")
+    .replace(/^>\s+/gm, "")
+    .replace(/^[*+-]\s+/gm, "")
+    .replace(/!\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/(\*\*|__)(.*?)\1/g, "$2")
+    .replace(/(\*|_)(.*?)\1/g, "$2");
+}
 
 // --- deflate-raw + base64url 인코딩 (의존성 0, 브라우저 네이티브) ---
 function bytesToBase64url(bytes: Uint8Array): string {
@@ -50,6 +63,7 @@ const MemoShare: React.FC = () => {
   const [remaining, setRemaining] = useState<number | null>(null);
   const [overLimit, setOverLimit] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [stripMd, setStripMd] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [base, setBase] = useState("");
   const baseLenRef = useRef(0);
@@ -59,6 +73,8 @@ const MemoShare: React.FC = () => {
     const base = `${window.location.origin}${window.location.pathname}`;
     setBase(base);
     baseLenRef.current = base.length + 3; // "#d=" 3자
+
+    setStripMd(localStorage.getItem(STRIP_MD_KEY) === "1");
 
     const hash = window.location.hash;
     if (hash.startsWith("#d=")) {
@@ -77,6 +93,12 @@ const MemoShare: React.FC = () => {
     if (!isInitialized) return;
     localStorage.setItem(STORAGE_KEY, input);
   }, [input, isInitialized]);
+
+  // 마크다운 제거 옵션 저장
+  useEffect(() => {
+    if (!isInitialized) return;
+    localStorage.setItem(STRIP_MD_KEY, stripMd ? "1" : "0");
+  }, [stripMd, isInitialized]);
 
   // 타이핑이 멈추면(500ms) URL 생성 + 잔여 용량 체크
   useEffect(() => {
@@ -107,8 +129,9 @@ const MemoShare: React.FC = () => {
   }, [input, isInitialized]);
 
   const handleCopy = () => {
-    if (!shareUrl || overLimit) return;
-    navigator.clipboard.writeText(shareUrl).then(() => {
+    if (!input) return;
+    const text = stripMd ? stripMarkdown(input) : input;
+    navigator.clipboard.writeText(text).then(() => {
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 2000);
     });
@@ -128,15 +151,23 @@ const MemoShare: React.FC = () => {
       <div className="flex flex-col gap-4">
         <div>
           <div className="mb-1 flex items-center justify-end gap-2">
+            <label className="flex cursor-pointer items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+              <input
+                type="checkbox"
+                checked={stripMd}
+                onChange={(e) => setStripMd(e.target.checked)}
+              />
+              마크다운 제거
+            </label>
             {isCopied && <span className="text-xs text-green-500">복사 완료!</span>}
             <Button
               variant="outline"
               size="sm"
               onClick={handleCopy}
-              disabled={!shareUrl || overLimit}
-              aria-label="공유 URL 복사"
+              disabled={!input}
+              aria-label="본문 복사"
             >
-              <Share1Icon className="h-4 w-4" />
+              <CopyIcon className="h-4 w-4" />
             </Button>
           </div>
           <textarea
@@ -161,7 +192,11 @@ const MemoShare: React.FC = () => {
           title="클릭하면 URL이 복사돼요"
           className={`${inputBox} h-20 cursor-pointer resize-none break-all font-mono text-xs`}
           value={shareUrl || base}
-          onClick={handleCopy}
+          onClick={() => {
+            if (!shareUrl || overLimit) return;
+            navigator.clipboard.writeText(shareUrl);
+            window.location.href = shareUrl;
+          }}
         />
 
         <div className="flex justify-center">
