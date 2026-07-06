@@ -1,10 +1,10 @@
 ---
-import "@/style/page.scss";
-import BaseLayout from "@/layouts/BaseLayout.astro";
 import PromptTemplate from "@/components/tools/PromptTemplate.tsx";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import "@/style/page.scss";
 ---
 
-<BaseLayout title="한줄코딩 - Prompt Template" bare>
+<BaseLayout title="한줄코딩 - 프롬프트 템플릿" bare>
   <a
     href="/tools"
     class="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-[rgb(var(--foreground))] transition-colors"
@@ -13,7 +13,9 @@ import PromptTemplate from "@/components/tools/PromptTemplate.tsx";
   </a>
   <h1 class="mt-4 mb-2 text-2xl font-bold md:text-3xl">프롬프트 템플릿</h1>
   <p class="mb-6 text-gray-500 dark:text-gray-400">
-    변수를 채워 넣어 재사용 가능한 AI 프롬프트를 빠르게 만들어주는 도구예요. 자주 쓰는 문장에 <code>{`{{변수}}`}</code>를 넣어두면, 값만 바꿔가며 완성된 프롬프트를 바로 복사할 수 있어요.
+    변수를 채워 넣어 재사용 가능한 AI 프롬프트를 빠르게 만들어주는 도구예요. 자주 쓰는 문장에 <code
+      >{`{{변수}}`}</code
+    >를 넣어두면, 값만 바꿔가며 완성된 프롬프트를 바로 복사할 수 있어요.
   </p>
   <div class="mt-4">
     <PromptTemplate client:load />
