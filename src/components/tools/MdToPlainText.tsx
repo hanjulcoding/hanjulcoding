@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button";
 import Giscus from "@/components/Giscus";
+import { Button } from "@/components/ui/button";
 
 type ReplaceRule = { from: string; to: string };
 
@@ -13,6 +13,7 @@ const MdToPlainText: React.FC = () => {
 
   const [removeBold, setRemoveBold] = useState(true);
   const [singleNewline, setSingleNewline] = useState(false);
+  const [joinLines, setJoinLines] = useState(false);
   const [removeEmoji, setRemoveEmoji] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [filterWordsEnabled, setFilterWordsEnabled] = useState(true);
@@ -30,6 +31,7 @@ const MdToPlainText: React.FC = () => {
         const parsed = JSON.parse(saved);
         setRemoveBold(parsed.removeBold ?? true);
         setSingleNewline(parsed.singleNewline ?? false);
+        setJoinLines(parsed.joinLines ?? false);
         setRemoveEmoji(parsed.removeEmoji ?? false);
         setFilterWordsEnabled(parsed.filterWordsEnabled ?? true);
         setFilterWords(parsed.filterWords ?? []);
@@ -50,6 +52,7 @@ const MdToPlainText: React.FC = () => {
       JSON.stringify({
         removeBold,
         singleNewline,
+        joinLines,
         removeEmoji,
         filterWordsEnabled,
         filterWords,
@@ -60,6 +63,7 @@ const MdToPlainText: React.FC = () => {
   }, [
     removeBold,
     singleNewline,
+    joinLines,
     removeEmoji,
     filterWordsEnabled,
     filterWords,
@@ -99,6 +103,11 @@ const MdToPlainText: React.FC = () => {
       result = result.replace(/\n+/g, "\n\n");
     }
 
+    // 멀티라인을 한 줄로
+    if (joinLines) {
+      result = result.replace(/\s*\n\s*/g, " ");
+    }
+
     // 이모지 제거
     if (removeEmoji) {
       result = result.replace(/\p{Extended_Pictographic}\u{FE0F}?\s*/gu, "");
@@ -118,6 +127,7 @@ const MdToPlainText: React.FC = () => {
     input,
     removeBold,
     singleNewline,
+    joinLines,
     removeEmoji,
     filterWords,
     filterWordsEnabled,
@@ -175,7 +185,15 @@ const MdToPlainText: React.FC = () => {
                   checked={singleNewline}
                   onChange={(e) => setSingleNewline(e.target.checked)}
                 />
-                여러 줄 바꿈을 한 줄로 변경
+                줄 정리
+              </label>
+              <label className="flex cursor-pointer items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={joinLines}
+                  onChange={(e) => setJoinLines(e.target.checked)}
+                />
+                여러 줄을 한 줄로 합치기
               </label>
               <label className="flex cursor-pointer items-center gap-2 text-sm">
                 <input
