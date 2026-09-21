@@ -24,7 +24,7 @@ All commands are run from the root of the project, from a terminal:
 새 글이 올라오면 RSS 리더로 자동으로 받아볼 수 있습니다. 아래 피드 주소를 리더에 추가하세요.
 
 ```text
-https://hanjulcoding.com/rss.xml
+https://blog.hanjulcoding.com/rss.xml
 ```
 
 - **RSS 리더 예시**: Feedly, Inoreader, NetNewsWire(macOS/iOS), Thunderbird, Vivaldi 등

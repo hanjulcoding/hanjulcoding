@@ -5,7 +5,7 @@ import basicSsl from "@vitejs/plugin-basic-ssl";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://hanjulcoding.com",
+  site: "https://blog.hanjulcoding.com",
   integrations: [
     react(),
     mdx(),
