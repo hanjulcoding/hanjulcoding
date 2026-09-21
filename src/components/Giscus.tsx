@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 // giscus.app 에서 발급된 설정값 (공개 식별자라 노출되어도 무방).
 const GISCUS = {
-  repo: "hanjulcoding/hanjulcoding",
+  repo: "hanjulcoding/blog",
   repoId: "R_kgDOGoe5eQ",
   category: "General",
   categoryId: "DIC_kwDOGoe5ec4DAQkl",
