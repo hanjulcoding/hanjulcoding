@@ -6,26 +6,7 @@ import Social from "./Social.astro";
   <Social platform="github" username="hanjulcoding/blog" />
   <Social platform="youtube" username="@hanjulcoding" />
   <a href="/rss.xml" class="rss-link" target="_blank" aria-label="RSS 피드">rss</a>
-  {/* 본 서비스(https://hanjulcoding.com)는 아직 준비 중이라 링크 대신 안내만 띄운다.
-      오픈하면 button 을 <a href="https://hanjulcoding.com"> 로 바꾸면 된다. */}
-  <button type="button" class="site-link" data-label="hanjulcoding" aria-live="polite">
-    hanjulcoding
-  </button>
 </footer>
-
-<script>
-  document.querySelectorAll<HTMLButtonElement>("button.site-link").forEach((button) => {
-    let timer: ReturnType<typeof setTimeout>;
-
-    button.addEventListener("click", () => {
-      button.textContent = "작업 중 입니다!";
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        button.textContent = button.dataset.label ?? "hanjulcoding";
-      }, 2000);
-    });
-  });
-</script>
 
 <style>
   footer {
@@ -36,8 +17,7 @@ import Social from "./Social.astro";
     margin-bottom: 2rem;
   }
 
-  a.rss-link,
-  button.site-link {
+  a.rss-link {
     border: 1px solid rgb(var(--foreground));
     padding: 0.5rem 1rem;
     background-color: rgb(var(--foreground));
@@ -50,15 +30,9 @@ import Social from "./Social.astro";
     display: inline-block;
   }
 
-  a.rss-link:hover,
-  button.site-link:hover {
+  a.rss-link:hover {
     background-color: rgb(var(--background));
     color: rgb(var(--foreground));
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  button.site-link {
-    font: inherit;
-    cursor: pointer;
   }
 </style>

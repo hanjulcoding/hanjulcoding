@@ -9,5 +9,44 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <h1 class="font-['DungGeunMo'] text-6xl mt-4 text-center">
       <span class="">한줄코딩</span>
     </h1>
+
+    <p class="font-['DungGeunMo'] mt-8 flex items-center justify-center gap-2 text-2xl">
+      upcoming
+      <button
+        type="button"
+        id="upcoming-trigger"
+        class="underline underline-offset-4 decoration-dotted cursor-pointer hover:opacity-70 transition-opacity"
+      >
+        한줄코딩
+      </button>
+      🎉
+    </p>
   </main>
+
+  {/* 네이티브 dialog 라 백드롭 · ESC 닫기 · 포커스 가둠을 브라우저가 처리한다. */}
+  <dialog
+    id="upcoming-modal"
+    class="m-auto rounded-lg border border-[rgb(var(--foreground))] bg-[rgb(var(--background))] p-8 text-[rgb(var(--foreground))] backdrop:bg-black/60"
+  >
+    <p class="font-['DungGeunMo'] text-center text-2xl">현재 작업 중입니다!</p>
+    <form method="dialog" class="mt-6 flex justify-center">
+      <button
+        class="rounded border border-[rgb(var(--foreground))] bg-[rgb(var(--foreground))] px-4 py-2 text-[rgb(var(--background))] transition-colors hover:bg-[rgb(var(--background))] hover:text-[rgb(var(--foreground))]"
+      >
+        닫기
+      </button>
+    </form>
+  </dialog>
 </BaseLayout>
+
+<script>
+  const trigger = document.getElementById("upcoming-trigger");
+  const modal = document.getElementById("upcoming-modal") as HTMLDialogElement | null;
+
+  trigger?.addEventListener("click", () => modal?.showModal());
+
+  // 백드롭(모달 바깥)을 누르면 닫는다.
+  modal?.addEventListener("click", (event) => {
+    if (event.target === modal) modal.close();
+  });
+</script>
