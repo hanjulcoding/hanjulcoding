@@ -1,38 +1,123 @@
 ---
-import Social from "./Social.astro";
+const links = [
+  { href: "https://github.com/hanjulcoding/blog", text: "github" },
+  { href: "https://www.youtube.com/@hanjulcoding", text: "youtube" },
+  { href: "/rss.xml", text: "rss" },
+];
+
+// 정적 빌드라 배포 시점의 연도가 박힌다.
+const year = new Date().getFullYear();
 ---
 
 <footer>
-  <Social platform="github" username="hanjulcoding/blog" />
-  <Social platform="youtube" username="@hanjulcoding" />
-  <a href="/rss.xml" class="rss-link" target="_blank" aria-label="RSS 피드">rss</a>
+  <div class="inner">
+    <div class="row">
+      <a class="brand" href="https://hanjulcoding.com" target="_blank" rel="noopener noreferrer">
+        hanjulcoding
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <nav class="links" aria-label="바깥 링크">
+        {
+          links.map((link) => (
+            <a href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.text}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <p class="copyright">© {year} 한줄코딩 · 매일매일 한 줄 씩</p>
+  </div>
 </footer>
 
 <style>
   footer {
-    justify-content: center;
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin: 4rem 1rem 2rem;
   }
 
-  a.rss-link {
-    border: 1px solid rgb(var(--foreground));
-    padding: 0.5rem 1rem;
+  /* 구분선과 글자 시작점을 본문 박스(max-width 1024 + padding 2rem)에 맞춘다. */
+  .inner {
+    max-width: 1024px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(var(--foreground), 0.12);
+    padding: 1.25rem 2rem 0;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  a.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid rgba(var(--foreground), 0.25);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-family: "DungGeunMo", monospace;
+    font-size: 0.85rem;
+    color: rgb(var(--foreground));
+    text-decoration: none;
+    transition:
+      background-color 0.15s,
+      border-color 0.15s,
+      color 0.15s;
+  }
+
+  a.brand:hover {
+    border-color: rgb(var(--foreground));
     background-color: rgb(var(--foreground));
     color: rgb(var(--background));
-    text-decoration: none;
-    border-radius: 0.25rem;
-    transition:
-      background-color 0.1s,
-      color 0.1s;
-    display: inline-block;
   }
 
-  a.rss-link:hover {
-    background-color: rgb(var(--background));
+  a.brand .arrow {
+    transition: transform 0.15s;
+  }
+
+  a.brand:hover .arrow {
+    transform: translate(1px, -1px);
+  }
+
+  .links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  /* 밑줄을 배경으로 깔아 hover 때 좌에서 우로 그어지게 한다. */
+  .links a {
+    font-size: 0.8rem;
+    color: rgba(var(--foreground), 0.55);
+    text-decoration: none;
+    background-image: linear-gradient(rgb(var(--foreground)), rgb(var(--foreground)));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 1px;
+    transition:
+      background-size 0.2s,
+      color 0.15s;
+  }
+
+  .links a:hover {
     color: rgb(var(--foreground));
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-size: 100% 1px;
+  }
+
+  .copyright {
+    margin: 0.9rem 0 0;
+    font-size: 0.7rem;
+    color: rgba(var(--foreground), 0.4);
+  }
+
+  /* 좁은 화면에서는 여백을 줄여 두 줄로 접히는 폭을 벌어준다. */
+  @media screen and (max-width: 636px) {
+    .inner {
+      padding: 1.25rem 1rem 0;
+    }
   }
 </style>
