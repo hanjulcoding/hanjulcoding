@@ -5,7 +5,7 @@ const links = [
   { href: "/rss.xml", text: "rss" },
 ];
 
-// 정적 빌드라 배포 시점의 연도가 박힌다.
+// 정적 빌드라 여기 값은 배포 시점에 굳는다. 아래 스크립트가 열람 시점으로 고쳐준다.
 const year = new Date().getFullYear();
 ---
 
@@ -14,7 +14,22 @@ const year = new Date().getFullYear();
     <div class="row">
       <a class="brand" href="https://hanjulcoding.com" target="_blank" rel="noopener noreferrer">
         hanjulcoding
-        <span class="arrow" aria-hidden="true">↗</span>
+        <svg
+          class="icon"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M15 3h6v6" />
+          <path d="M10 14 21 3" />
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6" />
+        </svg>
       </a>
 
       <nav class="links" aria-label="바깥 링크">
@@ -28,9 +43,14 @@ const year = new Date().getFullYear();
       </nav>
     </div>
 
-    <p class="copyright">© {year} 한줄코딩 · 매일매일 한 줄 씩</p>
+    <p class="copyright">© <span id="footer-year">{year}</span> 한줄코딩 · 매일매일 한 줄 씩</p>
   </div>
 </footer>
+
+{/* 해가 바뀌어도 재배포 전까지 지난 연도가 남지 않도록 보는 시점으로 덮어쓴다. */}
+<script is:inline>
+  document.getElementById("footer-year").textContent = new Date().getFullYear();
+</script>
 
 <style>
   footer {
@@ -76,11 +96,11 @@ const year = new Date().getFullYear();
     color: rgb(var(--background));
   }
 
-  a.brand .arrow {
+  a.brand .icon {
     transition: transform 0.15s;
   }
 
-  a.brand:hover .arrow {
+  a.brand:hover .icon {
     transform: translate(1px, -1px);
   }
 
